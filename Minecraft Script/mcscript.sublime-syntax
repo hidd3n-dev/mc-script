@@ -65,10 +65,6 @@ contexts:
       captures:
         2: mcs.error
     #
-    ## chars after line cont
-    #- match: '(?<=\\)[^\\\n]+$'
-    #  scope: mcs.error
-    #
     # trailing spaces at line start
     - match: '^[^\S\n]+'
       scope: mcs.error.spaces
@@ -553,3 +549,4 @@ contexts:
     - match: '\}'
       scope: mcs.wrap.braces.a
       pop: true
+
