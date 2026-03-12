@@ -3,8 +3,8 @@
 ### A Minecraft Commands Syntax Highlighter for Sublime Text
 
 <p align="center">
-  <img src="promo_image1.png" width="500">
-  <img src="promo_image2.png" width="500">
+  <img src="promo_image1.png" width="400">
+  <img src="promo_image2.png" width="400">
 </p>
 
 ## About
