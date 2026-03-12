@@ -2,21 +2,11 @@
 ---
 name: MC Script
 file_extensions:
-  #- mcswip
   - mcs
   - mcf
   - mcfunction
-#scope: source.mcswip
 scope: source.mcs
 author: "hidd3n-dev"
-
-
-# (!) TO ADD AN APOSTROPHE: ' , YOU HAVE TO ESCAPE IT WITH: \' and not just \ , MEANING THE FINAL RESULT SHOULD LOOK LIKE: \''
-
-
-variables:
-  example_variable: '[a-zA-Z_][a-zA-Z0-9_]*' # unused
-
 
 contexts:
 
@@ -294,15 +284,15 @@ contexts:
     - match: 'false'
       scope: mcs.core.bool.false
     # number ranges
-    - match: '-*\d+\.\.(?:-\d+|\d*)(?=[^\S])'
-      scope: mcs.core.number_ranges
-    - match: '(?<=[^\S]|^|=)\.\.(?:-*\d+)'
-      scope: mcs.core.number_ranges
     - match: '(?<!\bmatches\b\s)(?:(?:\d\.\d|\d\.?|\.?\d)|-(?:\d\.\d|\d\.?|\.?\d))\.{2}(?:(?:\d\.\d|\d\.?|\.?\d)|-(?:\d\.\d|\d\.?|\.?\d))'
       scope: mcs.core.number_ranges
     - match: '(?<!\bmatches\b\s)\.{2}(?:(?:\d\.\d|\d\.?|\.?\d)|-(?:\d\.\d|\d\.?|\.?\d))'
       scope: mcs.core.number_ranges
     - match: '(?<!\bmatches\b\s)(?:(?:\d\.\d|\d\.?|\.?\d)|-(?:\d\.\d|\d\.?|\.?\d))\.{2}'
+      scope: mcs.core.number_ranges
+    - match: '-*\d+\.\.(?:-\d+|\d*)(?=[^\S])'
+      scope: mcs.core.number_ranges
+    - match: '(?<=[^\S]|^|=)\.\.(?:-*\d+)'
       scope: mcs.core.number_ranges
     #
     - match: '(?<!\w)(?:=|\+=|-=|\*=|/=|%=|><|<|>|<=|=>)(?!\w)'
