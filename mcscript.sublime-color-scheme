@@ -1,0 +1,380 @@
+{
+  "name":"Minecraft Script Color Scheme (Sublime Text)",
+  "author":"hidd3n-dev",
+
+  "globals":
+  {
+    "foreground": "#e8e8e8",
+    "invisibles": "#ff33aa",
+    "background": "#1a1c20",
+    "accent": "#5299e0",
+    "caret": "#ff8c32",
+    "block_caret": "#ff7832",
+    "block_caret_border": "#ff7832",
+    "block_caret_underline": "#ff7832",
+    "block_caret_corner_style": "round",
+    "block_caret_corner_radius": "2",
+    "line_highlight": "#2E3340",
+    "misspelling": "#ff5555",
+    "fold_marker": "#ffbc3f",
+    "minimap_border": "#bbbbbb",
+    "popup_css": "",
+    "phantom_css": "",
+    "sheet_css": "",
+    "gutter": "#16171b",
+    "gutter_foreground": "#657075",
+    "gutter_foreground_highlight": "#eeeeee",
+    "line_diff_width": "4",
+    "line_diff_added": "#56d86e",
+    "line_diff_modified": "#ffbd4c",
+    "line_diff_deleted": "#ff3262",
+    "selection": "#3f4f5f88",
+    "selection_foreground": "",
+    "selection_border": "#3fffff",
+    "selection_border_width": "1",
+    "selection_corner_style": "square",
+    "selection_corner_radius": "",
+    "inactive_selection": "#161819aa",
+    "inactive_selection_border": "#ee3377",
+    "inactive_selection_foreground": "#ccddee",
+    "shadow": "#aa333399",
+    "shadow_width": "25",
+    "rulers": "#eeeeee",
+    "guide": "#bf4c80",
+    "active_guide": "#ff5f5f",
+    "stack_guide": "#555555",
+    "highlight": "#dd2244",
+    "find_highlight": "#050509",
+    "find_highlight_foreground": "#ffffff",
+    "brackets_options": "foreground bold",
+    "brackets_foreground": "#ee4455",
+    "bracket_contents_options": "foreground bold",
+    "bracket_contents_foreground": "#ee4455",
+    "tags_options": "underline",
+    "tags_foreground": "#4cd5ff"
+  },
+
+  "rules":
+  [
+    {
+      "name":"all font styles provided",
+      "scope":"unused",
+      "foreground":"",
+      "background":"",
+      "font_style":"bold italic glow underline stippled_underline squiggly_underline"
+    },
+    {},
+    {},// fallback
+    {
+      "scope":"mcs",
+      "foreground":"#ff22ff"
+    },
+    {},
+    {},// remarks
+    {
+      "scope":"mcs.remark.code",
+      "foreground":"hsl(60, 0%, 85%)",
+      "background":"hsl(60, 15%, 0%)",
+    },
+    {
+      "scope":"mcs.remark.notice",
+      "foreground":"hsl(40, 75%, 65%)",
+      "background":"hsl(60, 10%, 30%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.remark.confirm",
+      "foreground":"hsl(120, 85%, 50%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.remark.ignore",
+      "foreground":"hsl(0, 0%, 40%)",
+      "background":"hsl(0, 0%, 5%)",
+    },
+    {
+      "scope":"mcs.remark.raze",
+      "foreground":"hsl(355, 70%, 60%)",
+      "background":"hsl(0, 100%, 5%)",
+      "font_style":"bold"
+    },
+    {},
+    {},// comments
+    {
+      "scope":"mcs.comment.quad",
+      "foreground":"hsl(60, 55%, 70%)",
+      "background":"hsl(60, 15%, 30%)",
+    },
+    {
+      "scope":"mcs.comment.triple",
+      "foreground":"hsl(120, 35%, 70%)",
+    },
+    {
+      "scope":"mcs.comment.double",
+      "foreground":"hsl(205, 35%, 65%)",
+    },
+    {
+      "scope":"mcs.comment.single",
+      "foreground":"hsl(240, 2%, 55%)",
+    },
+    {
+      "scope":"mcs.comment.inline",
+      "foreground":"hsl(355, 60%, 65%)",
+    },
+    {},
+    {},// errors
+    {
+      "scope":"mcs.error",
+      "foreground":"hsl(0, 0%, 95%)",
+      "background":"hsl(355, 65%, 55%)",
+    },
+    {
+      "scope":"mcs.error.spaces",
+      "foreground":"hsl(0, 0%, 95%)",
+      "background":"hsl(350, 100%, 65%)",
+    },
+    {},
+    {},// utils
+    {
+      "scope":"mcs.util.arrows",
+      "foreground":"hsl(310, 90%, 80%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.util.remark",
+      "foreground":"hsl(355, 100%, 65%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.util.doubt",
+      "foreground":"hsl(25, 100%, 60%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.util.minusate",
+      "foreground":"hsl(350, 100%, 60%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.util.additionally",
+      "foreground":"hsl(205, 100%, 65%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.util.attention",
+      "foreground":"hsl(300, 100%, 75%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.util.including",
+      "foreground":"hsl(255, 60%, 80%)",//45, 85%, 55%//255, 50%, 75%
+      "font_style":"bold"
+    },
+    {},
+    {},// quotes
+    {
+      "scope":"mcs.quotes.single",
+      "foreground":"hsl(30, 100%, 65%)",
+    },{
+      "scope":"mcs.quotes.single.body",
+      "foreground":"hsl(60, 100%, 75%)",
+    },
+    {
+      "scope":"mcs.quotes",
+      "foreground":"hsl(205, 70%, 75%)",//145, 100%, 85%//345, 40%, 65%
+    },{
+      "scope":"mcs.quotes.body",
+      "foreground":"hsl(145, 100%, 85%)",//145, 100%, 85%//205, 70%, 75%
+    },
+    {
+      "scope":"mcs.quotes.escape_chars",
+      "foreground":"hsl(335, 100%, 85%)",
+    },
+    {},
+    {},// wraps
+    {
+      "scope":"mcs.wrap.parentheses.a",
+      "foreground":"hsl(30, 100%, 65%)",
+    },{
+      "scope":"mcs.wrap.parentheses.b",
+      "foreground":"hsl(60, 100%, 85%)",
+    },
+    {
+      "scope":"mcs.wrap.brackets.a",
+      "foreground":"hsl(340, 100%, 75%)",
+    },{
+      "scope":"mcs.wrap.brackets.b",
+      "foreground":"hsl(95, 100%, 65%)",
+    },
+    {
+      "scope":"mcs.wrap.braces.a",
+      "foreground":"hsl(240, 100%, 80%)",
+    },{
+      "scope":"mcs.wrap.braces.b",
+      "foreground":"hsl(30, 100%, 80%)",
+    },
+    {},
+    {},// macros
+    {
+      "scope":"mcs.macro",
+      "foreground":"hsl(130, 90%, 60%)",
+      "background":"hsla(240, 25%, 35%, 0%)",
+    },
+    {
+      "scope":"mcs.macro.arg",
+      "foreground":"hsl(300, 100%, 85%)",
+      "background":"hsl(240, 25%, 35%)",
+    },
+    {
+      "scope":"mcs.macro.arg.invalid",
+      "foreground":"hsl(0, 0%, 95%)",
+      "background":"hsl(350, 100%, 65%)",//355, 65%, 55%
+    },
+    {},
+    {},// declarations
+    {
+      "scope":"mcs.declare.path_separator",
+      "foreground":"hsl(335, 100%, 65%)",//45, 85%, 55%//50, 60%, 50%//200, 100%, 60%
+      //"background":"hsl(280, 20%, 20%)",
+      "font_style":"bold"
+    },
+    {"scope":"mcs.declare.colon.name.alphabetic","foreground":"hsl(325, 100%, 75%)"},
+    {"scope":"mcs.declare.colon.singles.alphabetic","foreground":"hsl(150, 90%, 75%)"},
+    {"scope":"mcs.declare.colon.quotes.alphabetic","foreground":"hsl(35, 80%, 75%)"},
+    {"scope":"mcs.declare.colon.name.numeric","foreground":"hsl(325, 100%, 75%)"},
+    {"scope":"mcs.declare.colon.singles.numeric","foreground":"hsl(150, 90%, 75%)"},
+    {"scope":"mcs.declare.colon.quotes.numeric","foreground":"hsl(35, 80%, 75%)"},
+    {"scope":"mcs.declare.colon.name.quote","foreground":"hsl(325, 100%, 75%)"},
+    {"scope":"mcs.declare.colon.singles.quote","foreground":"hsl(150, 90%, 75%)"},
+    {"scope":"mcs.declare.colon.quotes.quote","foreground":"hsl(35, 80%, 75%)"},
+    {"scope":"mcs.declare.colon.name.compound","foreground":"hsl(325, 100%, 75%)"},
+    {"scope":"mcs.declare.colon.singles.compound","foreground":"hsl(150, 90%, 75%)"},
+    {"scope":"mcs.declare.colon.quotes.compound","foreground":"hsl(35, 80%, 75%)"},
+    {},
+    {"scope":"mcs.declare.equal.name.alphabetic","foreground":"hsl(255, 60%, 80%)"},
+    {"scope":"mcs.declare.equal.singles.alphabetic","foreground":"hsl(215, 100%, 85%)"},
+    {"scope":"mcs.declare.equal.quotes.alphabetic","foreground":"hsl(25, 100%, 85%)"},
+    {"scope":"mcs.declare.equal.name.numeric","foreground":"hsl(255, 60%, 80%)"},
+    {"scope":"mcs.declare.equal.singles.numeric","foreground":"hsl(215, 100%, 85%)"},
+    {"scope":"mcs.declare.equal.quotes.numeric","foreground":"hsl(25, 100%, 85%)"},
+    {"scope":"mcs.declare.equal.name.quote","foreground":"hsl(255, 60%, 80%)"},
+    {"scope":"mcs.declare.equal.singles.quote","foreground":"hsl(215, 100%, 85%)"},
+    {"scope":"mcs.declare.equal.quotes.quote","foreground":"hsl(25, 100%, 85%)"},
+    {"scope":"mcs.declare.equal.name.compound","foreground":"hsl(255, 60%, 80%)"},
+    {"scope":"mcs.declare.equal.singles.compound","foreground":"hsl(215, 100%, 85%)"},
+    {"scope":"mcs.declare.equal.quotes.compound","foreground":"hsl(25, 100%, 85%)"},
+    {},
+    {"scope":"mcs.declare.colon.name","foreground":"hsl(325, 100%, 75%)"},
+    {"scope":"mcs.declare.colon.singles","foreground":"hsl(150, 90%, 75%)"},
+    {"scope":"mcs.declare.colon.quotes","foreground":"hsl(35, 80%, 75%)"},
+    {},
+    {"scope":"mcs.declare.equal.name","foreground":"hsl(255, 60%, 80%)"},
+    {"scope":"mcs.declare.equal.singles","foreground":"hsl(215, 100%, 85%)"},
+    {"scope":"mcs.declare.equal.quotes","foreground":"hsl(25, 100%, 85%)"},
+    {},
+    {},// core
+    {
+      "scope":"mcs.core.line_cont",
+      "foreground":"hsl(50, 100%, 50%)",
+      "background":"hsl(60, 65%, 20%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.core.bool.true",
+      "foreground":"hsl(130, 80%, 60%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.core.bool.false",
+      "foreground":"hsl(355, 100%, 65%)",
+      "font_style":"italic"
+    },
+    {
+      "scope":"mcs.core.numbers",
+      //"foreground":"hsl(130, 50%, 70%)",
+      //"foreground":"hsl(110, 100%, 65%)",
+      "foreground":"hsl(40, 100%, 75%)",
+    },
+    {
+      "scope":"mcs.core.number_ranges",
+      "foreground":"hsl(110, 100%, 65%)",
+      "font_style":"bold"
+    },
+    {"scope":"mcs.core.number.byte","foreground":"hsl(350, 100%, 60%)"},
+    {"scope":"mcs.core.number.short","foreground":"hsl(295, 100%, 70%)"},
+    {"scope":"mcs.core.number.int","foreground":"hsl(240, 100%, 75%)"},
+    {"scope":"mcs.core.number.long","foreground":"hsl(180, 65%, 45%)"},
+    {"scope":"mcs.core.number.float","foreground":"hsl(45, 85%, 60%)"},
+    {"scope":"mcs.core.number.double","foreground":"hsl(130, 60%, 55%)"},
+    {
+      "scope":"mcs.core.array.byte",
+      "foreground":"hsl(30, 75%, 70%)",
+      "font_style":"italic"
+    },
+    {
+      "scope":"mcs.core.array.int",
+      "foreground":"hsl(200, 100%, 65%)",
+      "font_style":"italic"
+    },
+    {
+      "scope":"mcs.core.array.long",
+      "foreground":"hsl(190, 80%, 65%)",
+      "font_style":"italic"
+    },
+    {
+      "scope":"mcs.core.operations",
+      "foreground":"hsl(150, 100%, 70%)",
+    },
+    {
+      "scope":"mcs.core.target_selectors",
+      "foreground":"hsl(105, 100%, 65%)",
+    },
+    {
+      "scope":"mcs.core.tilde",
+      "foreground":"hsl(300, 100%, 75%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.core.caret",
+      "foreground":"hsl(25, 100%, 60%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.core.call.bool",
+      "foreground":"hsl(35, 100%, 65%)",
+      "font_style":"bold"
+    },
+    {
+      "scope":"mcs.core.call.uuid",
+      "foreground":"hsl(15, 100%, 75%)",
+      "font_style":"bold"
+    },{
+      "scope":"mcs.core.call.uuid.arg",
+      "foreground":"hsl(40, 70%, 85%)",
+      "font_style":""
+    },
+    {
+      "scope":"mcs.core.call.invalid",
+      "foreground":"hsl(0, 0%, 95%)",
+      "background":"hsl(350, 100%, 65%)",//355, 65%, 55%
+    },
+    {},
+    {},// commands
+    {"scope":"mcs.command.say","foreground":"hsl(105, 100%, 65%)"},
+    {"scope":"mcs.command.execute","foreground":"hsl(345, 100%, 75%)","font_style":"bold"},
+    {"scope":"mcs.command.run","foreground":"hsl(345, 100%, 75%)","font_style":"bold"},
+    {"scope":"mcs.command.return","foreground":"hsl(345, 100%, 75%)","font_style":"bold"},
+    {"scope":"mcs.command.function","foreground":"hsl(160, 100%, 75%)","font_style":"bold"},
+    {"scope":"mcs.command.data","foreground":"hsl(185, 100%, 65%)"},
+    {"scope":"mcs.command.tellraw","foreground":"hsl(235, 100%, 80%)"},
+    {"scope":"mcs.command.trigger","foreground":"hsl(280, 100%, 75%)"},
+    {"scope":"mcs.command.forceload","foreground":"hsl(10, 100%, 70%)"},
+    {"scope":"mcs.command.tick","foreground":"hsl(5, 100%, 65%)"},
+    {"scope":"mcs.command.scoreboard","foreground":"hsl(40, 100%, 70%)"},
+    {"scope":"mcs.command.a.1","foreground":"hsl(325, 100%, 80%)"},
+    {"scope":"mcs.command.a","foreground":"hsl(270, 100%, 85%)"},
+    {"scope":"mcs.command.b","foreground":"hsl(25, 100%, 80%)"},
+    {"scope":"mcs.command.c","foreground":"hsl(100, 100%, 80%)"},
+    {},
+  ]
+}
