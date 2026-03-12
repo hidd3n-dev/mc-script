@@ -1,2 +1,12 @@
-# mc-script
-A custom Sublime Text syntax for Minecraft command files.
+# Minecraft Script
+
+### A Minecraft Commands Syntax Highlighter for Sublime Text
+Provides syntax highlighting for Minecraft command files, such as `file.mcfunction`.
+
+## Installation
+Place the contents of this repo inside a FOLDER of your desired naming, inside your Sublime Text Packages directory.
+
+Example path on Windows:
+```
+C:\Users\USER\AppData\Roaming\Sublime Text\Packages\FOLDER\(contents)
+```
