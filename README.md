@@ -14,6 +14,4 @@ Also works with file extensions `.mcs` and `.mcf` for convenience sake.
 Place the `Minecraft Script` folder inside your Sublime Text Packages directory.
 
 Example path on Windows:
-```
-C:\Users\USER\AppData\Roaming\Sublime Text\Packages\Minecraft Script\
-```
+> C:\Users\USER\AppData\Roaming\Sublime Text\Packages\Minecraft Script\
