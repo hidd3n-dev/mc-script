@@ -13,7 +13,6 @@ long comment
 ####
 
 trailing line conts \\
---%%\ chars after line cont
  trailing spaces at line start
 duplicate spaces  inside sentences
 trailing spaces at line end 
