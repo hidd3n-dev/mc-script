@@ -1,5 +1,7 @@
 # Minecraft Script
 
+<img width="1620" height="1230" alt="promo1" src="https://github.com/user-attachments/assets/ae51bc48-efd3-4de6-9778-ebe773cf817d" />
+
 ### A Minecraft Commands Syntax Highlighter for Sublime Text
 Provides syntax highlighting for Minecraft command files, such as `file.mcfunction`.
 
@@ -12,10 +14,3 @@ Example path on Windows:
 ```
 C:\Users\USER\AppData\Roaming\Sublime Text\Packages\FOLDER\(contents)
 ```
-
-## Demos
-### Example 1
-<img width="1620" height="1230" alt="promo1" src="https://github.com/user-attachments/assets/ae51bc48-efd3-4de6-9778-ebe773cf817d" />
-
-### Example 2
-> (more examples coming)
