@@ -67,7 +67,7 @@
     {},// fallback
     {
       "scope":"mcs",
-      "foreground":"#ff22ff"
+      "foreground":"#ffaaff"
     },
     {},
     {},// remarks
@@ -378,3 +378,4 @@
     {},
   ]
 }
+
