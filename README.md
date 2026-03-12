@@ -3,6 +3,8 @@
 ### A Minecraft Commands Syntax Highlighter for Sublime Text
 Provides syntax highlighting for Minecraft command files, such as `file.mcfunction`.
 
+Also works with file extensions such as `.mcs` and `.mcf` for convenience sake.
+
 ## Installation
 Place the contents of this repo inside a FOLDER of your desired naming, inside your Sublime Text Packages directory.
 
