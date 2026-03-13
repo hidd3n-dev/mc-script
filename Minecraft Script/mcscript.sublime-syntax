@@ -549,4 +549,3 @@ contexts:
     - match: '\}'
       scope: mcs.wrap.braces.a
       pop: true
-
