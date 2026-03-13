@@ -2,11 +2,21 @@
 ---
 name: MC Script
 file_extensions:
+  #- mcswip
   - mcs
   - mcf
   - mcfunction
+#scope: source.mcswip
 scope: source.mcs
 author: "hidd3n-dev"
+
+
+# (!) TO ADD AN APOSTROPHE: ' , YOU HAVE TO ESCAPE IT WITH: \' and not just \ , MEANING THE FINAL RESULT SHOULD LOOK LIKE: \''
+
+
+variables:
+  example_variable: '[a-zA-Z_][a-zA-Z0-9_]*' # unused
+
 
 contexts:
 
@@ -64,6 +74,10 @@ contexts:
     - match: '(?<=[^\\])(\\)(\\+$)'
       captures:
         2: mcs.error
+    #
+    ## chars after line cont
+    #- match: '(?<=\\)[^\\\n]+$'
+    #  scope: mcs.error
     #
     # trailing spaces at line start
     - match: '^[^\S\n]+'
@@ -549,4 +563,3 @@ contexts:
     - match: '\}'
       scope: mcs.wrap.braces.a
       pop: true
-
