@@ -1,11 +1,12 @@
 # Minecraft Script
 
-### Minecraft Command Functions Syntax Highlighter for Sublime Text
-<!--
-![Promotional image 1 showcasing the syntax highlighting capabilities.](/wip)
 
-![Promotional image 2 showcasing the syntax highlighting capabilities.](/wip)
--->
+### Minecraft Command Functions Syntax Highlighter for Sublime Text
+
+![Promotional image 1 showcasing the syntax highlighting capabilities.](/promo1.gif)
+
+![Promotional image 2 showcasing the syntax highlighting capabilities.](/promo2.gif)
+
 
 ## About
 A Sublime Text package providing syntax highlighting to `.mcfunction` files used in Minecraft data packs development.
@@ -19,6 +20,7 @@ Example path after correct installation on Windows would be:
 ```
 %APPDATA%\Sublime Text\Packages\Minecraft Script
 ```
+
 
 > [!WARNING]
 > You might have to backup and remove any prior syntax highlighting packages affecting `.mcfunction` files before also clearing their cache entry in order to make this package work.
