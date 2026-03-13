@@ -2,8 +2,8 @@
 
 ### `.mcfunction` Syntax Highlighter for Sublime Text
 
-<p align="center"><img src="promo_image1.png" width="90%"></p>
-<p align="center"><img src="promo_image2.png" width="90%"></p>
+![Promotional image 1 showcasing the syntax highlighting capabilities.](/promo_image1.png)
+![Promotional image 2 showcasing the syntax highlighting capabilities.](/promo_image2.png)
 
 ## About
 A Sublime Text custom syntax package for highlighting Minecraft commands inside `.mcfunction` files.
