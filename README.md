@@ -23,7 +23,7 @@ Example path after correct installation on Windows would be:
 
 
 > [!WARNING]
-> You might have to backup and remove any prior syntax highlighting packages affecting `.mcfunction` files before also clearing their cache entry in order to make this package work.
+> You might have to backup and remove any prior syntax highlighting packages affecting `.mcfunction` files before also clearing their cache entries in order to make this package work.
 >
 > Path to Sublime Text cache on Windows:
 > ```
