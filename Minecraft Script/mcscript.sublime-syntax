@@ -5,16 +5,16 @@ file_extensions:
   - mcs
   - mcf
   - mcfunction
-scope: source.mcs
+scope: mcs
 author: "hidd3n-dev"
 
 contexts:
 
   main:
+    - include: mc
     - include: remarks
     - include: comments
     - include: errors
-    - include: utils
     - include: wraps
     - include: macros
     - include: core
@@ -23,155 +23,101 @@ contexts:
     - include: quotes
 
 
+  mc:
+    - match: '(#?minecraft)(:)'
+      captures:
+        1: mcs.mc
+        2: mcs.mc.a
+
+
   remarks:
     - match: '``'
-      scope: mcs.remark.code
       push:
         - meta_scope: mcs.remark.code
         - match: '``'
-          scope: mcs.remark.code
           pop: true
-    - match: '\^{2,}.*$'
-      scope: mcs.remark.notice
-    - match: '^v{2,}.*$'
-      scope: mcs.remark.confirm
-    - match: '\%{2,}.*$'
-      scope: mcs.remark.ignore
     - match: '\*{2,}.*$'
       scope: mcs.remark.raze
+    - match: '\*'
+      scope: mcs.remark.asterisk
 
 
   comments:
-    - match: '####'
-      scope: mcs.comment.quad
-      push:
-        - include: remarks
-        - include: errors
-        - meta_scope: mcs.comment.quad
-        - match: '####\n$'
-          scope: mcs.comment.quad
-          pop: true
-    - match: '^###.*$'
-      scope: mcs.comment.triple
-    - match: '^##.*$'
+    - match: '^[^\S]*##.*$'
       scope: mcs.comment.double
-    - match: '^#.*$'
+    - match: '^[^\S]*#.*$'
       scope: mcs.comment.single
 
 
   errors:
     # trailing line conts after ending line cont
-    - match: '(?<=[^\\])(\\)(\\+$)'
-      captures:
-        2: mcs.error
-    #
+    - match: '\\{2,}$'
+      scope: mcs.error
     # trailing spaces at line start
-    - match: '^[^\S\n]+'
-      scope: mcs.error.spaces
-    #
+    - match: '^[^\S\n]+(?!#)'
+      scope: mcs.error
     # 2+ spaces anywhere
-    - match: '(?<=\S+)(?:\s{2,}|\t+|[^\S]{2,})(?=\S+)'
-      scope: mcs.error.spaces
-    #
+    - match: '(?<=\S)(?:\t+|[^\S]{2,})(?=\S)'
+      scope: mcs.error
     # trailing spaces at line end
-    - match: '(?<=\S+)[^\S\n]+$'
-      scope: mcs.error.spaces
-    #
+    - match: '[^\S\n]+$'
+      scope: mcs.error
     # command starts with /
     - match: '^[^\S]*/+'
       scope: mcs.error
-    #
     # integer number range has trailing dots
-    - match: '(?<=\bmatches\b\s)(\d*)(\.{3,})(-*\d)'
-      captures:
-        2: mcs.error
-    - match: '(?<=\bmatches\b\s)(-*\d)(\.{3,})(\d*)'
-      captures:
-        2: mcs.error
-    #
+    - match: '(?<=matches )(?:-*\d+\.{3,}\d*|\d*\.{3,}-*\d+)'
+      scope: mcs.error
     # positive to negative number ranges
-    - match: '(?<!-)(?:\d\.\d|\d\.?|\.?\d)\.{2,}-(?:\d\.\d|\d\.?|\.?\d)'
+    - match: '(?<!-)(?:\d+\.\d+|\d+\.?|\.\d+)\.{2,}-(?:\d+\.\d+|\d+\.?|\.\d+)'
       scope: mcs.error
-    #
-    # macro line starts with trailing $'s
-    - match: '^[^\S]*\${2,}'
+    # trailing macro $'s
+    - match: '\${2,}\S*'
       scope: mcs.error
-    #
-    # macro call has trailing $'s
-    - match: '\${2,}(?=\()'
-      scope: mcs.error
-      push:
-        - include: remarks
-        - include: errors
-        - meta_scope: mcs.macro.arg
-        - match: '\)'
-          scope: mcs.error
-          pop: true
-        - match: '[^a-zA-Z0-9_]'
-          scope: mcs.macro.arg.invalid
-
-
-  utils:
-    - match: '(-+>+|<+-+)'
-      scope: mcs.util.arrows
-    - match: '\*'
-      scope: mcs.util.remark
-    - match: '\?{2,}'
-      scope: mcs.util.doubt
-    - match: '-{2,}'
-      scope: mcs.util.minusate
-    - match: '\+{2,}'
-      scope: mcs.util.additionally
-    - match: '!{2,}'
-      scope: mcs.util.attention
-    - match: '&{2,}'
-      scope: mcs.util.including
 
 
   quotes:
     - match: '\'''
-      scope: mcs.quotes.single
       push:
+        - include: mc
         - include: remarks
         - include: errors
-        - include: utils
         - include: macros
-        - meta_scope: mcs.quotes.single.body
+        - meta_scope: mcs.quotes.single
+        - meta_content_scope: mcs.quotes.single.body
         - match: '\\\S'
-          scope: mcs.quotes.escape_chars
+          scope: mcs.quotes.escape
         - match: '\'''
-          scope: mcs.quotes.single
           pop: true
     #
     - match: '"'
-      scope: mcs.quotes
       push:
+        - include: mc
         - include: remarks
         - include: errors
-        - include: utils
         - include: macros
-        - meta_scope: mcs.quotes.body
+        - meta_scope: mcs.quotes
+        - meta_content_scope: mcs.quotes.body
         - match: '\\\S'
-          scope: mcs.quotes.escape_chars
+          scope: mcs.quotes.escape
         - match: '"'
-          scope: mcs.quotes
           pop: true
 
 
   wraps:
     - match: '\('
-      scope: mcs.wrap.parentheses.a
-      push: parentheses_wraps_b
+      scope: mcs.wrap.a
+      push: wraps_a
     - match: '\['
-      scope: mcs.wrap.brackets.a
-      push: brackets_wraps_b
+      scope: mcs.wrap.a
+      push: wraps_a
     - match: '\{'
-      scope: mcs.wrap.braces.a
-      push: braces_wraps_b
+      scope: mcs.wrap.a
+      push: wraps_a
 
 
   macros:
-    - match: '(?<!\$)\$\('
+    - match: '\$\('
       scope: mcs.macro
       push:
         - include: remarks
@@ -181,371 +127,162 @@ contexts:
           scope: mcs.macro
           pop: true
         - match: '[^a-zA-Z0-9_]'
-          scope: mcs.macro.arg.invalid
+          scope: mcs.error
     - match: '^\$\S+'
       scope: mcs.macro
 
 
   declarations:
-    - match: '#*[0-9A-Za-z_\-\.]+:(?=[a-z_])'
-      scope: mcs.declare.colon.name.alphabetic
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\'':(?=[a-z_])'
-      scope: mcs.declare.colon.singles.alphabetic
-    - match: '"#*[0-9A-Za-z_\-\.:]+":(?=[a-z_])'
-      scope: mcs.declare.colon.quotes.alphabetic
-    #
-    - match: '#*[0-9A-Za-z_\-\.]+:(?=[-\.\d])'
-      scope: mcs.declare.colon.name.numeric
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\'':(?=[-\.\d])'
-      scope: mcs.declare.colon.singles.numeric
-    - match: '"#*[0-9A-Za-z_\-\.:]+":(?=[-\.\d])'
-      scope: mcs.declare.colon.quotes.numeric
-    #
-    - match: '#*[0-9A-Za-z_\-\.]+:(?=[\''"])'
-      scope: mcs.declare.colon.name.quote
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\'':(?=[\''"])'
-      scope: mcs.declare.colon.singles.quote
-    - match: '"#*[0-9A-Za-z_\-\.:]+":(?=[\''"])'
-      scope: mcs.declare.colon.quotes.quote
-    #
-    - match: '#*[0-9A-Za-z_\-\.]+:(?=[{\[])'
-      scope: mcs.declare.colon.name.compound
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\'':(?=[{\[])'
-      scope: mcs.declare.colon.singles.compound
-    - match: '"#*[0-9A-Za-z_\-\.:]+":(?=[{\[])'
-      scope: mcs.declare.colon.quotes.compound
-    #
-    #
-    - match: '#*[0-9A-Za-z_\-\.]+=(?=[a-z_])'
-      scope: mcs.declare.equal.name.alphabetic
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\''=(?=[a-z_])'
-      scope: mcs.declare.equal.singles.alphabetic
-    - match: '"#*[0-9A-Za-z_\-\.:]+"=(?=[a-z_])'
-      scope: mcs.declare.equal.quotes.alphabetic
-    #
-    - match: '#*[0-9A-Za-z_\-\.]+=(?=[-\.\d])'
-      scope: mcs.declare.equal.name.numeric
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\''=(?=[-\.\d])'
-      scope: mcs.declare.equal.singles.numeric
-    - match: '"#*[0-9A-Za-z_\-\.:]+"=(?=[-\.\d])'
-      scope: mcs.declare.equal.quotes.numeric
-    #
-    - match: '#*[0-9A-Za-z_\-\.]+=(?=[\''"])'
-      scope: mcs.declare.equal.name.quote
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\''=(?=[\''"])'
-      scope: mcs.declare.equal.singles.quote
-    - match: '"#*[0-9A-Za-z_\-\.:]+"=(?=[\''"])'
-      scope: mcs.declare.equal.quotes.quote
-    #
-    - match: '#*[0-9A-Za-z_\-\.]+=(?=[{\[])'
-      scope: mcs.declare.equal.name.compound
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\''=(?=[{\[])'
-      scope: mcs.declare.equal.singles.compound
-    - match: '"#*[0-9A-Za-z_\-\.:]+"=(?=[{\[])'
-      scope: mcs.declare.equal.quotes.compound
-    #
-    # fall backs
-    - match: '#*[0-9A-Za-z_\-\.]+:'
-      scope: mcs.declare.colon.name
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\'':'
-      scope: mcs.declare.colon.singles
+    - match: '(?:"#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+):(?=[\[{])'
+      scope: mcs.declare.colon.object
     - match: '"#*[0-9A-Za-z_\-\.:]+":'
       scope: mcs.declare.colon.quotes
+    - match: '\''#*[0-9A-Za-z_\-\.:]+\'':'
+      scope: mcs.declare.colon.quotes
+    - match: '#*[0-9A-Za-z_\-\.]+:'
+      scope: mcs.declare.colon
     #
-    - match: '#*[0-9A-Za-z_\-\.]+='
-      scope: mcs.declare.equal.name
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\''='
-      scope: mcs.declare.equal.singles
+    - match: '(?:"#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+)=(?=[\[{])'
+      scope: mcs.declare.equal.object
     - match: '"#*[0-9A-Za-z_\-\.:]+"='
       scope: mcs.declare.equal.quotes
+    - match: '\''#*[0-9A-Za-z_\-\.:]+\''='
+      scope: mcs.declare.equal.quotes
+    - match: '#*[0-9A-Za-z_\-\.]+='
+      scope: mcs.declare.equal
     #
-    #
-    - match: '(?<=[:=])(?=[0-9A-Za-z_\-\.])'
+    - match: '(?<=[:=])(?=[a-zA-Z0-9\-\._])'
       push:
         - include: remarks
         - include: errors
-        - include: utils
         - include: macros
-        - match: '(?=[^0-9A-Za-z_\-\./])|$'
-          pop: true
         - match: '/'
-          scope: mcs.declare.path_separator
+          scope: mcs.declare.separator
+        - match: '(?=[^a-zA-Z0-9\-\._/])|$'
+          pop: true
 
 
   core:
+    - match: '(?:(?:\d+\.\d+|\d+\.?|\.?\d+)|-(?:\d+\.\d+|\d+\.?|\.?\d+))\.{2,}(?:(?:\d+\.\d+|\d+\.?|\.?\d+)|-(?:\d+\.\d+|\d+\.?|\.?\d+))'
+      scope: mcs.core.number.range
+    - match: '\.{2,}(?:(?:\d+\.\d+|\d+\.?|\.?\d+)|-(?:\d+\.\d+|\d+\.?|\.?\d+))'
+      scope: mcs.core.number.range
+    - match: '(?:(?:\d+\.\d+|\d+\.?|\.?\d+)|-(?:\d+\.\d+|\d+\.?|\.?\d+))\.{2,}'
+      scope: mcs.core.number.range
+    - match: '-*\d+\.{2,}(?:-\d+|\d*)'
+      scope: mcs.core.number.range
+    - match: '\.{2,}(?:-*\d+)'
+      scope: mcs.core.number.range
+    #
+    - match: '(?<!\w)-*\d*\.\d+(?!\w)'
+      scope: mcs.core.number
+    - match: '(?<!\w)-*\d+\.*(?!\w)'
+      scope: mcs.core.number
+    #
+    - match: '(?<!\w)(?:=|\+=|-=|\*=|/=|%=|><|<|>|<=|>=)(?!\w)'
+      scope: mcs.core.operation
+    - match: '(?<!\w)@(?:p|r|a|e|s|n)(?!\w)'
+      scope: mcs.core.target_selector
+    - match: '(?<!\S)~(?=[\t\s\d\.\-\\])'
+      scope: mcs.core.tilde
+    - match: '(?<!\S)\^(?=[\t\s\d\.\-\\])'
+      scope: mcs.core.caret
+    #
+    - match: '(?<!\.)\.(?!\.)'
+      scope: mcs.core.access
     - match: '\\$' #'\\\n$'
       scope: mcs.core.line_cont
     - match: 'true'
       scope: mcs.core.bool.true
     - match: 'false'
       scope: mcs.core.bool.false
-    # number ranges
-    - match: '(?<!\bmatches\b\s)(?:(?:\d\.\d|\d\.?|\.?\d)|-(?:\d\.\d|\d\.?|\.?\d))\.{2}(?:(?:\d\.\d|\d\.?|\.?\d)|-(?:\d\.\d|\d\.?|\.?\d))'
-      scope: mcs.core.number_ranges
-    - match: '(?<!\bmatches\b\s)\.{2}(?:(?:\d\.\d|\d\.?|\.?\d)|-(?:\d\.\d|\d\.?|\.?\d))'
-      scope: mcs.core.number_ranges
-    - match: '(?<!\bmatches\b\s)(?:(?:\d\.\d|\d\.?|\.?\d)|-(?:\d\.\d|\d\.?|\.?\d))\.{2}'
-      scope: mcs.core.number_ranges
-    - match: '-*\d+\.\.(?:-\d+|\d*)(?=[^\S])'
-      scope: mcs.core.number_ranges
-    - match: '(?<=[^\S]|^|=)\.\.(?:-*\d+)'
-      scope: mcs.core.number_ranges
     #
-    - match: '(?<!\w)(?:=|\+=|-=|\*=|/=|%=|><|<|>|<=|=>)(?!\w)'
-      scope: mcs.core.operations
-    - match: '(?<!\w)@(?:p|r|a|e|s|n)(?!\w)'
-      scope: mcs.core.target_selectors
-    - match: '(?<!\S)~(?=[\t\s\d\.\-\\])'
-      scope: mcs.core.tilde
-    - match: '(?<!\S)\^(?=[\t\s\d\.\-\\])'
-      scope: mcs.core.caret
-    # data numbers
-    - match: '(?<![\w_\-\.])(-?\d+)(B|b)(?![\w_\-\.])'
-      captures:
-        1: mcs.core.numbers
-        2: mcs.core.number.byte
-    - match: '(?<![\w_\-\.])(-?\d+)(S|s)(?![\w_\-\.])'
-      captures:
-        1: mcs.core.numbers
-        2: mcs.core.number.short
-    - match: '(?<![\w_\-\.])(-?\d+)(I|i)(?![\w_\-\.])'
-      captures:
-        1: mcs.core.numbers
-        2: mcs.core.number.int
-    - match: '(?<![\w_\-\.])(-?\d+)(L|l)(?![\w_\-\.])'
-      captures:
-        1: mcs.core.numbers
-        2: mcs.core.number.long
-    - match: '(?<![\w_\-\.])(-?\d+|-?\d*\.\d+)(F|f)(?![\w_\-\.])'
-      captures:
-        1: mcs.core.numbers
-        2: mcs.core.number.float
-    - match: '(?<![\w_\-\.])(-?\d+|-?\d*\.\d+)(D|d)(?![\w_\-\.])'
-      captures:
-        1: mcs.core.numbers
-        2: mcs.core.number.double
-    # numbers
-    - match: '(?<!\w)-*\d*\.\d+(?!\w)'
-      scope: mcs.core.numbers
-    - match: '(?<!\w)-*\d+\.*(?!\w)'
-      scope: mcs.core.numbers
-    # array data
-    - match: 'B(?=;)'
-      scope: mcs.core.array.byte
-    - match: 'I(?=;)'
-      scope: mcs.core.array.int
-    - match: 'L(?=;)'
-      scope: mcs.core.array.long
-    # SNBT operations
-    - match: '\bbool\('
-      scope: mcs.core.call.bool
+    - match: '\b(?:bool|uuid)\('
+      scope: mcs.core.call
       push:
         - include: remarks
         - include: errors
-        - include: utils
         - include: macros
+        - meta_scope: mcs.core.call.arg
         - match: '\)'
-          scope: mcs.core.call.bool
+          scope: mcs.core.call
           pop: true
-        - match: '0'
-          scope: mcs.core.bool.false
-        - match: '\d'
-          scope: mcs.core.bool.true
-        - match: 'true'
-          scope: mcs.core.bool.true
-        - match: 'false'
-          scope: mcs.core.bool.false
-        - match: '.'
-          scope: mcs.core.call.invalid
-    #
-    - match: '\buuid\('
-      scope: mcs.core.call.uuid
-      push:
-        - include: remarks
-        - include: errors
-        - include: utils
-        - include: macros
-        - match: '\)'
-          scope: mcs.core.call.uuid
-          pop: true
-        - match: '.'
-          scope: mcs.core.call.uuid.arg
 
 
   commands:
-    # special commands
-    - match: '\brun\b'
-      scope: mcs.command.run
-    - match: '\btrigger\b'
-      scope: mcs.command.trigger
-    - match: '(?<=^|run\s{1})\bsay\b'
-      scope: mcs.command.say
-    - match: '(?<=^|run\s{1})\bexecute\b'
-      scope: mcs.command.execute
-    - match: '(?<=^|run\s{1})\breturn\b'
-      scope: mcs.command.return
-    - match: '(?<=^|run\s{1})\bfunction\b'
-      scope: mcs.command.function
-    - match: '(?<=^|run\s{1})\bdata\b'
-      scope: mcs.command.data
-    - match: '(?<=^|run\s{1})\btellraw\b'
-      scope: mcs.command.tellraw
-    - match: '(?<=^|run\s{1})\b(?:forceload|schedule)\b'
-      scope: mcs.command.forceload
-    - match: '(?<=^|run\s{1})\btick\b'
-      scope: mcs.command.tick
-    - match: '(?<=^|run\s{1})\bscoreboard\b'
-      scope: mcs.command.scoreboard
-    # common commands
-    - match: '(?<=^|run\s{1})\b(?:advancement|playsound|title|tp|fill|random)\b'
-      scope: mcs.command.a.1
-    - match: '(?<=^|run\s{1})\b(?:clear|enchant|experience|xp|gamemode|give|particle|recipe|spawnpoint|stopsound|datapack|defaultgamemode|difficulty|dialog|fillbiome|gamerule|setworldspawn|time|weather|worldborder|attribute|damage|effect|kill|ride|rotate|spectate|spreadplayers|tag|team|bossbar|summon|clone|setblock|place|locate|item|loot|waypoint|teleport)\b'
+    - match: '(?<=^|run )\b(?:say|tellraw)\b'
       scope: mcs.command.a
-    # misc commands
-    - match: '(?<=^|run\s{1})\b(?:me|teammsg|tm|publish|debug|help|test|seed|reload|jfr|version|fetchprofile|swing)\b'
+    - match: '(?<=^|run )\b(?:function|data)\b'
       scope: mcs.command.b
-    # online commands
-    - match: '(?<=^|run\s{1})\b(?:perf|save-all|save-off|save-on|stop|ban-ip|ban|banlist|deop|op|pardon-ip|pardon|setidletimeout|transfer|whitelist|msg|tell|w|kick|list)\b'
+    - match: '(?<=^|run )\b(?:scoreboard|schedule)\b'
       scope: mcs.command.c
+    - match: '(?<=^|run )\b(?:forceload|tick)\b'
+      scope: mcs.command.d
+    - match: '\b(?:run|with|trigger|if|unless|result|success|dummy)\b'
+      scope: mcs.command
+    - match: '(?<=^|run )\b(?:execute|return|advancement|playsound|title|tp|fill|random|clear|enchant|experience|xp|gamemode|give|particle|recipe|spawnpoint|stopsound|datapack|defaultgamemode|difficulty|dialog|fillbiome|gamerule|setworldspawn|time|weather|worldborder|attribute|damage|effect|kill|ride|rotate|spectate|spreadplayers|tag|team|bossbar|summon|clone|setblock|place|locate|item|loot|waypoint|teleport|me|teammsg|tm|publish|debug|help|test|seed|reload|jfr|version|fetchprofile|swing|perf|save-all|save-off|save-on|stop|ban-ip|ban|banlist|deop|op|pardon-ip|pardon|setidletimeout|transfer|whitelist|msg|tell|w|kick|list)\b'
+      scope: mcs.command
 
 
 
-  parentheses_wraps_a:
+  wraps_a:
+    - include: mc
     - include: remarks
     - include: comments
     - include: errors
-    - include: utils
     - include: macros
     - include: core
     #- include: commands
     - include: declarations
     - include: quotes
-    - match: '\['
-      scope: mcs.wrap.brackets.a
-      push: brackets_wraps_b
-    - match: '\{'
-      scope: mcs.wrap.braces.a
-      push: braces_wraps_b
+    #
     - match: '\('
-      scope: mcs.wrap.parentheses.a
-      push: parentheses_wraps_b
+      scope: mcs.wrap.b
+      push: wraps_b
+    - match: '\['
+      scope: mcs.wrap.b
+      push: wraps_b
+    - match: '\{'
+      scope: mcs.wrap.b
+      push: wraps_b
+    #
     - match: '\)'
-      scope: mcs.wrap.parentheses.b
+      scope: mcs.wrap.a
+      pop: true
+    - match: '\]'
+      scope: mcs.wrap.a
+      pop: true
+    - match: '\}'
+      scope: mcs.wrap.a
       pop: true
 
-  parentheses_wraps_b:
+  wraps_b:
+    - include: mc
     - include: remarks
     - include: comments
     - include: errors
-    - include: utils
     - include: macros
     - include: core
     #- include: commands
     - include: declarations
     - include: quotes
-    - match: '\['
-      scope: mcs.wrap.brackets.a
-      push: brackets_wraps_b
-    - match: '\{'
-      scope: mcs.wrap.braces.a
-      push: braces_wraps_b
+    #
     - match: '\('
-      scope: mcs.wrap.parentheses.b
-      push: parentheses_wraps_a
+      scope: mcs.wrap.a
+      push: wraps_a
+    - match: '\['
+      scope: mcs.wrap.a
+      push: wraps_a
+    - match: '\{'
+      scope: mcs.wrap.a
+      push: wraps_a
+    #
     - match: '\)'
-      scope: mcs.wrap.parentheses.a
+      scope: mcs.wrap.b
       pop: true
-
-
-  brackets_wraps_a:
-    - include: remarks
-    - include: comments
-    - include: errors
-    - include: utils
-    - include: macros
-    - include: core
-    #- include: commands
-    - include: declarations
-    - include: quotes
-    - match: '\('
-      scope: mcs.wrap.parentheses.a
-      push: parentheses_wraps_b
-    - match: '\{'
-      scope: mcs.wrap.braces.a
-      push: braces_wraps_b
-    - match: '\['
-      scope: mcs.wrap.brackets.a
-      push: brackets_wraps_b
     - match: '\]'
-      scope: mcs.wrap.brackets.b
+      scope: mcs.wrap.b
       pop: true
-
-  brackets_wraps_b:
-    - include: remarks
-    - include: comments
-    - include: errors
-    - include: utils
-    - include: macros
-    - include: core
-    #- include: commands
-    - include: declarations
-    - include: quotes
-    - match: '\('
-      scope: mcs.wrap.parentheses.a
-      push: parentheses_wraps_b
-    - match: '\{'
-      scope: mcs.wrap.braces.a
-      push: braces_wraps_b
-    - match: '\['
-      scope: mcs.wrap.brackets.b
-      push: brackets_wraps_a
-    - match: '\]'
-      scope: mcs.wrap.brackets.a
-      pop: true
-
-
-  braces_wraps_a:
-    - include: remarks
-    - include: comments
-    - include: errors
-    - include: utils
-    - include: macros
-    - include: core
-    #- include: commands
-    - include: declarations
-    - include: quotes
-    - match: '\('
-      scope: mcs.wrap.parentheses.a
-      push: parentheses_wraps_b
-    - match: '\['
-      scope: mcs.wrap.brackets.a
-      push: brackets_wraps_b
-    - match: '\{'
-      scope: mcs.wrap.braces.a
-      push: braces_wraps_b
     - match: '\}'
-      scope: mcs.wrap.braces.b
-      pop: true
-
-  braces_wraps_b:
-    - include: remarks
-    - include: comments
-    - include: errors
-    - include: utils
-    - include: macros
-    - include: core
-    #- include: commands
-    - include: declarations
-    - include: quotes
-    - match: '\('
-      scope: mcs.wrap.parentheses.a
-      push: parentheses_wraps_b
-    - match: '\['
-      scope: mcs.wrap.brackets.a
-      push: brackets_wraps_b
-    - match: '\{'
-      scope: mcs.wrap.braces.b
-      push: braces_wraps_a
-    - match: '\}'
-      scope: mcs.wrap.braces.a
+      scope: mcs.wrap.b
       pop: true
