@@ -1,13 +1,5 @@
 # Minecraft Script
 
-
-### Minecraft Command Functions Syntax Highlighter for Sublime Text
-
-![Promotional image 1 showcasing the syntax highlighting capabilities.](/promo1.gif)
-
-![Promotional image 2 showcasing the syntax highlighting capabilities.](/promo2.gif)
-
-
 ## About
 A Sublime Text package providing syntax highlighting to `.mcfunction` files used in Minecraft data packs development.
 
