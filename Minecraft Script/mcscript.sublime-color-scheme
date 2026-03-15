@@ -69,6 +69,16 @@
       "scope":"mcs",
       "foreground":"#e8e8e8"
     },
+    {},// mc
+    {
+      "scope":"mcs.mc",
+      "foreground":"#e0eaea",
+      //"background":"#303a50",
+      "font_style":"bold"
+    },{
+      "scope":"mcs.mc.a",
+      "foreground":"#ff5599",
+    },
     {},
     {},// remarks
     {
@@ -103,10 +113,11 @@
     },
     {},
     {},// commands
-    {
-      "scope":"mcs.command",
-      "foreground":"#ff7aa0",
-    },
+    {"scope":"mcs.command","foreground":"hsl(350, 100%, 75%)"},
+    {"scope":"mcs.command.a","foreground":"hsl(140, 80%, 65%)"},
+    {"scope":"mcs.command.b","foreground":"hsl(180, 80%, 75%)"},
+    {"scope":"mcs.command.c","foreground":"hsl(40, 100%, 75%)"},
+    {"scope":"mcs.command.d","foreground":"hsl(355, 80%, 65%)"},
     {},
     {},// quotes
     {
@@ -114,9 +125,15 @@
       "foreground":"#ffb0cc",
     },{
       "scope":"mcs.quotes.single",
+      "foreground":"#ff80a0",
+    },{
+      "scope":"mcs.quotes.single.body",
       "foreground":"#ffee88",
     },{
       "scope":"mcs.quotes",
+      "foreground":"#a0bbee",
+    },{
+      "scope":"mcs.quotes.body",
       "foreground":"#a0ffc5",
     },
     {},
@@ -144,15 +161,13 @@
       "foreground":"#ff5599",
       "font_style":"bold"
     },
-    {"scope":"mcs.declare.equal.quote","foreground":"#ffbbcc"},
-    {"scope":"mcs.declare.equal.object","foreground":"#ffbbcc"},
-    {"scope":"mcs.declare.equal.number","foreground":"#ffaabb"},
-    {"scope":"mcs.declare.equal","foreground":"#ffaabb"},
+    {"scope":"mcs.declare.colon.object","foreground":"hsl(225, 80%, 85%)"},
+    {"scope":"mcs.declare.colon.quotes","foreground":"hsl(35, 70%, 80%)"},
+    {"scope":"mcs.declare.colon","foreground":"hsl(325, 100%, 80%)"},
     {},
-    {"scope":"mcs.declare.colon.quote","foreground":"#ffbbee"},
-    {"scope":"mcs.declare.colon.object","foreground":"#ffbbee"},
-    {"scope":"mcs.declare.colon.number","foreground":"#eeaadd"},
-    {"scope":"mcs.declare.colon","foreground":"#eeaadd"},
+    {"scope":"mcs.declare.equal.object","foreground":"hsl(215, 100%, 80%)"},
+    {"scope":"mcs.declare.equal.quotes","foreground":"hsl(340, 100%, 80%)"},
+    {"scope":"mcs.declare.equal","foreground":"hsl(30, 80%, 75%)"},
     {},
     {},// core
     {
@@ -182,7 +197,7 @@
     },
     {
       "scope":"mcs.core.number.range",
-      "foreground":"#88ff88",
+      "foreground":"#aaffbb",
     },
     {
       "scope":"mcs.core.operation",
@@ -209,7 +224,7 @@
     },
     {
       "scope":"mcs.core.call.arg",
-      "foreground":"#ffaa88",
+      "foreground":"#ffbb99",
     },
     {},
   ]

@@ -92,6 +92,25 @@ uuid(str) uuid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
 ... {"#Declare:specify":{content}}
 ... {"#Declare:specify":[content]}
 
+... [{#Declare:path/path/path}]
+... [{#Declare:11}]
+... [{#Declare:'content'}]
+... [{#Declare:"content"}]
+... [{#Declare:{content}}]
+... [{#Declare:[content]}]
+... [{'#Declare:specify':path/path/path}]
+... [{'#Declare:specify':11}]
+... [{'#Declare:specify':'content'}]
+... [{'#Declare:specify':"content"}]
+... [{'#Declare:specify':{content}}]
+... [{'#Declare:specify':[content]}]
+... [{"#Declare:specify":path/path/path}]
+... [{"#Declare:specify":11}]
+... [{"#Declare:specify":'content'}]
+... [{"#Declare:specify":"content"}]
+... [{"#Declare:specify":{content}}]
+... [{"#Declare:specify":[content]}]
+
 ... #Declare=path/path/path
 ... #Declare=11
 ... #Declare='content'
@@ -130,12 +149,34 @@ uuid(str) uuid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
 ... ["#Declare:specify"={content}]
 ... ["#Declare:specify"=[content]]
 
+... {[#Declare=path/path/path]}
+... {[#Declare=11]}
+... {[#Declare='content']}
+... {[#Declare="content"]}
+... {[#Declare={content}]}
+... {[#Declare=[content]]}
+... {['#Declare:specify'=path/path/path]}
+... {['#Declare:specify'=11]}
+... {['#Declare:specify'='content']}
+... {['#Declare:specify'="content"]}
+... {['#Declare:specify'={content}]}
+... {['#Declare:specify'=[content]]}
+... {["#Declare:specify"=path/path/path]}
+... {["#Declare:specify"=11]}
+... {["#Declare:specify"='content']}
+... {["#Declare:specify"="content"]}
+... {["#Declare:specify"={content}]}
+... {["#Declare:specify"=[content]]}
+
 ... #Declare:
 ... '#Declare:specify':
 ... "#Declare:specify":
 ... #Declare=
 ... '#Declare:specify'=
 ... "#Declare:specify"=
+
+
+complex.path."to:something".new.awaits.'but.don\'t'.you.DARE.__go__.hollow:a.b.c/d/e/f
 
 
 say hi
@@ -153,6 +194,15 @@ run say hi
 /execute as @n[distance=...5] run say hi
 
 
+minecraft:
+'minecraft:'
+"minecraft:"
+'minecraft:':
+"minecraft:":
+'minecraft:'=
+"minecraft:"=
+
+
 function namespace:path/to/function with entity @s
 function namespace:path/to/function with storage namespace:database a.b.c
 
@@ -161,8 +211,8 @@ execute if ... unless ...
 execute store result ...
 execute store success ...
 
-
 scoreboard objectives add obj0 trigger
+scoreboard objectives add obj0 dummy
 
 execute if score @s obj0 matches 11.. run say hi
 execute unless score @s obj0 matches 11.. run say hi
@@ -200,7 +250,7 @@ stuff=-11
 stuff=..11
 stuff=a
 stuff=a/b/c/d/e
-stuff=?
+{{[[{{[[((stuff=?))]]}}]]}}
 
 
 stuff=...11
@@ -309,26 +359,27 @@ advancement revoke @s minecraft:...
 
 ## 1.21.11 - 90+2 commands
 
+execute
+return
 run
 with
 trigger
 
 say
-execute
-return
+tellraw
 function
 data
-tellraw
 scoreboard
+schedule
+forceload
+tick
+
 advancement
 playsound
 title
 tp
 fill
 random
-forceload
-schedule
-tick
 clear
 enchant
 experience

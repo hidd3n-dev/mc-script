@@ -11,6 +11,7 @@ author: "hidd3n-dev"
 contexts:
 
   main:
+    - include: mc
     - include: remarks
     - include: comments
     - include: errors
@@ -20,6 +21,13 @@ contexts:
     - include: commands
     - include: declarations
     - include: quotes
+
+
+  mc:
+    - match: '(#?minecraft)(:)'
+      captures:
+        1: mcs.mc
+        2: mcs.mc.a
 
 
   remarks:
@@ -71,10 +79,12 @@ contexts:
   quotes:
     - match: '\'''
       push:
+        - include: mc
         - include: remarks
         - include: errors
         - include: macros
         - meta_scope: mcs.quotes.single
+        - meta_content_scope: mcs.quotes.single.body
         - match: '\\\S'
           scope: mcs.quotes.escape
         - match: '\'''
@@ -82,10 +92,12 @@ contexts:
     #
     - match: '"'
       push:
+        - include: mc
         - include: remarks
         - include: errors
         - include: macros
         - meta_scope: mcs.quotes
+        - meta_content_scope: mcs.quotes.body
         - match: '\\\S'
           scope: mcs.quotes.escape
         - match: '"'
@@ -121,23 +133,23 @@ contexts:
 
 
   declarations:
-    #- match: '[#0-9A-Za-z_\-\.\''\":]+=(?=\"|\'')'
-    #  scope: mcs.declare.equal.quote
-    #- match: '[#0-9A-Za-z_\-\.\''\":]+=(?=\[|{)'
-    #  scope: mcs.declare.equal.object
-    #- match: '[#0-9A-Za-z_\-\.\''\":]+=(?=\d)'
-    #  scope: mcs.declare.equal.number
-    #- match: '[#0-9A-Za-z_\-\.\''\":]+='
-    #  scope: mcs.declare.equal
-    ##
-    #- match: '[#0-9A-Za-z_\-\.\''\":]+:(?=\"|\'')'
-    #  scope: mcs.declare.colon.quote
-    #- match: '[#0-9A-Za-z_\-\.\''\":]+:(?=\[|{)'
-    #  scope: mcs.declare.colon.object
-    #- match: '[#0-9A-Za-z_\-\.\''\":]+:(?=\d)'
-    #  scope: mcs.declare.colon.number
-    #- match: '[#0-9A-Za-z_\-\.\''\":]+:'
-    #  scope: mcs.declare.colon
+    - match: '(?:"#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+):(?=[\[{])'
+      scope: mcs.declare.colon.object
+    - match: '"#*[0-9A-Za-z_\-\.:]+":'
+      scope: mcs.declare.colon.quotes
+    - match: '\''#*[0-9A-Za-z_\-\.:]+\'':'
+      scope: mcs.declare.colon.quotes
+    - match: '#*[0-9A-Za-z_\-\.]+:'
+      scope: mcs.declare.colon
+    #
+    - match: '(?:"#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+)=(?=[\[{])'
+      scope: mcs.declare.equal.object
+    - match: '"#*[0-9A-Za-z_\-\.:]+"='
+      scope: mcs.declare.equal.quotes
+    - match: '\''#*[0-9A-Za-z_\-\.:]+\''='
+      scope: mcs.declare.equal.quotes
+    - match: '#*[0-9A-Za-z_\-\.]+='
+      scope: mcs.declare.equal
     #
     - match: '(?<=[:=])(?=[a-zA-Z0-9\-\._])'
       push:
@@ -198,14 +210,23 @@ contexts:
 
 
   commands:
-    - match: '\b(?:run|with|trigger|if|unless|result|success)\b'
+    - match: '(?<=^|run )\b(?:say|tellraw)\b'
+      scope: mcs.command.a
+    - match: '(?<=^|run )\b(?:function|data)\b'
+      scope: mcs.command.b
+    - match: '(?<=^|run )\b(?:scoreboard|schedule)\b'
+      scope: mcs.command.c
+    - match: '(?<=^|run )\b(?:forceload|tick)\b'
+      scope: mcs.command.d
+    - match: '\b(?:run|with|trigger|if|unless|result|success|dummy)\b'
       scope: mcs.command
-    - match: '(?<=^|run )\b(?:say|execute|return|function|data|tellraw|scoreboard|advancement|playsound|title|tp|fill|random|forceload|schedule|tick|clear|enchant|experience|xp|gamemode|give|particle|recipe|spawnpoint|stopsound|datapack|defaultgamemode|difficulty|dialog|fillbiome|gamerule|setworldspawn|time|weather|worldborder|attribute|damage|effect|kill|ride|rotate|spectate|spreadplayers|tag|team|bossbar|summon|clone|setblock|place|locate|item|loot|waypoint|teleport|me|teammsg|tm|publish|debug|help|test|seed|reload|jfr|version|fetchprofile|swing|perf|save-all|save-off|save-on|stop|ban-ip|ban|banlist|deop|op|pardon-ip|pardon|setidletimeout|transfer|whitelist|msg|tell|w|kick|list)\b'
+    - match: '(?<=^|run )\b(?:execute|return|advancement|playsound|title|tp|fill|random|clear|enchant|experience|xp|gamemode|give|particle|recipe|spawnpoint|stopsound|datapack|defaultgamemode|difficulty|dialog|fillbiome|gamerule|setworldspawn|time|weather|worldborder|attribute|damage|effect|kill|ride|rotate|spectate|spreadplayers|tag|team|bossbar|summon|clone|setblock|place|locate|item|loot|waypoint|teleport|me|teammsg|tm|publish|debug|help|test|seed|reload|jfr|version|fetchprofile|swing|perf|save-all|save-off|save-on|stop|ban-ip|ban|banlist|deop|op|pardon-ip|pardon|setidletimeout|transfer|whitelist|msg|tell|w|kick|list)\b'
       scope: mcs.command
 
 
 
   wraps_a:
+    - include: mc
     - include: remarks
     - include: comments
     - include: errors
@@ -236,6 +257,7 @@ contexts:
       pop: true
 
   wraps_b:
+    - include: mc
     - include: remarks
     - include: comments
     - include: errors
