@@ -1,6 +1,5 @@
 # Minecraft Script
 
-## About
 A Sublime Text package providing syntax highlighting to `.mcfunction` files used in Minecraft data packs development.
 
 Also works with `.mcs` and `.mcf` file extensions for convenience sake.
