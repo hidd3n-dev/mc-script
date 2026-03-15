@@ -1,34 +1,20 @@
 
-``dev code``
-vv dev confirm
-^^ dev notice
-%% dev ignore
-** dev raze
+`` code ``
+** raze
+* remark
 
 # comment
 ## double comment
-### triple comment
-####
-long comment
-####
 
 trailing line conts \\
- trailing spaces at line start
+ trailing spaces at command start
 duplicate spaces  inside sentences
 trailing spaces at line end 
 /non truncated command entry
-trailing integer number range dots: matches 1... , matches ...1 , matches 1...1, matches ...-1
-positive to negative number ranges: 1..-1, 1...-1, .1..-.1, .1...-.1, 1..-.1, 1...-.1, .1..-1, .1...-1
+trailing integer number range dots: matches 11... , matches ...11 , matches 11...11, matches ...-11
+positive to negative number ranges: 11..-11, 11...-11, .11..-.11, .11...-.11, 11..-.11, 11...-.11, .11..-11, .11...-11
 trailing macro $$(call)
 $$trailing macro line
-
--> <-- arrows --> <-
-* remark *
-?? doubt ??
--- minusate --
-++ additionally ++
-!! attention !!
-&& including &&
 
 'contents of single quotes'
 "contents of double quotes"
@@ -37,6 +23,7 @@ escaped characters: "\a \b \c \d ... \\"
 ((((contents of parentheses))))
 [[[[contents of brackets]]]]
 {{{{contents of braces}}}}
+{[{[{[{[{[]}]}]}]}]}
 
 {[({[({[(nested contents)]})]})]}
 n{e[s(t{e[d( [c]o)n]t}e)n]t}s
@@ -47,74 +34,101 @@ $macro call has invalid characters $(a.r!g?u,m:e-n't)
 
 line cont \
 true and false
-1 1.1 1. .1 -1 -1.1 -1. -.1
+11 11.11 11. .11 -11 -11.11 -11. -.11
 
-1..
-1.. 
-..1
- ..1
-1..1
--1..1
--1..-1
+11..
+11.. 
+..11
+ ..11
+11..11
+-11..11
+-11..-11
 
-number data types:
-1B, 1b (byte)
-1S, 1s (short)
-1I, 1i (int)
-1L, 1l (long)
-1.1F, 1.1f (float)
-1.1D, 1.1d (double)
-[B;1b,2b,3b] (byte)
-[I;1b,2s,3i] (int)
-[L;1b,2s,3i,4l] (long)
-
-= += -= *= /= %= >< < > <= =>
+= += -= *= /= %= >< < > <= >=
 
 @p @r @a @e @s @n
 
-~ ~ ~ ... ~1 ~ ~ ... ~.1 ~ ~ ... ~1. ~ ~ ... ~-1 ~ ~ ... ~-.1 ~ ~ ... ~-1. ~ ~
-^ ^ ^ ... ^1 ^ ^ ... ^.1 ^ ^ ... ^1. ^ ^ ... ^-1 ^ ^ ... ^-.1 ^ ^ ... ^-1. ^ ^
+~ ~ ~ ... ~11 ~ ~ ... ~.11 ~ ~ ... ~11. ~ ~ ... ~-11 ~ ~ ... ~-.11 ~ ~ ... ~-11. ~ ~
+^ ^ ^ ... ^11 ^ ^ ... ^.11 ^ ^ ... ^11. ^ ^ ... ^-11 ^ ^ ... ^-.11 ^ ^ ... ^-11. ^ ^
 
-bool(arg) bool($(true)) bool(5) bool(0) bool(false) bool("arg")
+bool(arg) bool($(true))
 uuid(str) uuid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
 
 ... #Declare:path/path/path
-... #Declare:1
+... #Declare:11
 ... #Declare:'content'
 ... #Declare:"content"
 ... #Declare:{content}
 ... #Declare:[content]
 ... '#Declare:specify':path/path/path
-... '#Declare:specify':1
+... '#Declare:specify':11
 ... '#Declare:specify':'content'
 ... '#Declare:specify':"content"
 ... '#Declare:specify':{content}
 ... '#Declare:specify':[content]
 ... "#Declare:specify":path/path/path
-... "#Declare:specify":1
+... "#Declare:specify":11
 ... "#Declare:specify":'content'
 ... "#Declare:specify":"content"
 ... "#Declare:specify":{content}
 ... "#Declare:specify":[content]
 
+... {#Declare:path/path/path}
+... {#Declare:11}
+... {#Declare:'content'}
+... {#Declare:"content"}
+... {#Declare:{content}}
+... {#Declare:[content]}
+... {'#Declare:specify':path/path/path}
+... {'#Declare:specify':11}
+... {'#Declare:specify':'content'}
+... {'#Declare:specify':"content"}
+... {'#Declare:specify':{content}}
+... {'#Declare:specify':[content]}
+... {"#Declare:specify":path/path/path}
+... {"#Declare:specify":11}
+... {"#Declare:specify":'content'}
+... {"#Declare:specify":"content"}
+... {"#Declare:specify":{content}}
+... {"#Declare:specify":[content]}
+
 ... #Declare=path/path/path
-... #Declare=1
+... #Declare=11
 ... #Declare='content'
 ... #Declare="content"
 ... #Declare={content}
 ... #Declare=[content]
 ... '#Declare:specify'=path/path/path
-... '#Declare:specify'=1
+... '#Declare:specify'=11
 ... '#Declare:specify'='content'
 ... '#Declare:specify'="content"
 ... '#Declare:specify'={content}
 ... '#Declare:specify'=[content]
 ... "#Declare:specify"=path/path/path
-... "#Declare:specify"=1
+... "#Declare:specify"=11
 ... "#Declare:specify"='content'
 ... "#Declare:specify"="content"
 ... "#Declare:specify"={content}
 ... "#Declare:specify"=[content]
+
+... [#Declare=path/path/path]
+... [#Declare=11]
+... [#Declare='content']
+... [#Declare="content"]
+... [#Declare={content}]
+... [#Declare=[content]]
+... ['#Declare:specify'=path/path/path]
+... ['#Declare:specify'=11]
+... ['#Declare:specify'='content']
+... ['#Declare:specify'="content"]
+... ['#Declare:specify'={content}]
+... ['#Declare:specify'=[content]]
+... ["#Declare:specify"=path/path/path]
+... ["#Declare:specify"=11]
+... ["#Declare:specify"='content']
+... ["#Declare:specify"="content"]
+... ["#Declare:specify"={content}]
+... ["#Declare:specify"=[content]]
 
 ... #Declare:
 ... '#Declare:specify':
@@ -127,13 +141,7 @@ uuid(str) uuid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
 say hi
 run say hi
 
-{d{d{d{d{d{d{d{d{aa{bb}aa}c}c}c}c}c}c}c}c}
-[[[[ 1.2b [[[]]]] 3.5f ]]]
-{[{[{[{{[[{{[[...]]}}]]}},{...}]}]}]}
-{enclosures}
-[enclosures]
-{ nesting [ more { stuff ( in " here " ) } ] }
-{ trigger { say ( something ) } }
+{d:{d={d={d:{d={d={d:{d={aa{bb}aa}c}c}c}c}c}c}c}c}
 
 ""
 "quote"
@@ -144,6 +152,42 @@ run say hi
 
 /execute as @n[distance=...5] run say hi
 
+
+function namespace:path/to/function with entity @s
+function namespace:path/to/function with storage namespace:database a.b.c
+
+execute if ... unless ...
+
+execute store result ...
+execute store success ...
+
+
+scoreboard objectives add obj0 trigger
+
+execute if score @s obj0 matches 11.. run say hi
+execute unless score @s obj0 matches 11.. run say hi
+
+execute if score @s obj1 = @s obj2 run say hi
+execute if score @s obj1 < @s obj2 run say hi
+execute if score @s obj1 > @s obj2 run say hi
+execute if score @s obj1 <= @s obj2 run say hi
+execute if score @s obj1 >= @s obj2 run say hi
+execute unless score @s obj1 = @s obj2 run say hi
+execute unless score @s obj1 < @s obj2 run say hi
+execute unless score @s obj1 > @s obj2 run say hi
+execute unless score @s obj1 <= @s obj2 run say hi
+execute unless score @s obj1 >= @s obj2 run say hi
+
+scoreboard players operation @s obj3 = @s obj4
+scoreboard players operation @s obj3 += @s obj4
+scoreboard players operation @s obj3 -= @s obj4
+scoreboard players operation @s obj3 *= @s obj4
+scoreboard players operation @s obj3 /= @s obj4
+scoreboard players operation @s obj3 %= @s obj4
+scoreboard players operation @s obj3 >< @s obj4
+scoreboard players operation @s obj3 < @s obj4
+scoreboard players operation @s obj3 > @s obj4
+
 declaration:
 azAZ09_-.:
 "@custom:key":
@@ -151,104 +195,104 @@ minecraft:
 ... #stuff:
 equalitydeclare=
 [tag=]
-stuff=1
-stuff=-1
-stuff=..1
+stuff=11
+stuff=-11
+stuff=..11
 stuff=a
 stuff=a/b/c/d/e
 stuff=?
 
 
-stuff=...1
-stuff=..1
-stuff=..1.
-stuff=..1.1
-stuff=..-.1
-stuff=..-1
-stuff=..-1.
-stuff=..-1.1
+stuff=...11
+stuff=..11
+stuff=..11.
+stuff=..11.11
+stuff=..-.11
+stuff=..-11
+stuff=..-11.
+stuff=..-11.11
 #
-stuff=.1..
-stuff=1..
-stuff=1...
-stuff=1.1..
-stuff=-.1..
-stuff=-1..
-stuff=-1...
-stuff=-1.1..
+stuff=.11..
+stuff=11..
+stuff=11...
+stuff=11.11..
+stuff=-.11..
+stuff=-11..
+stuff=-11...
+stuff=-11.11..
 #
-stuff=.1...1
-stuff=.1..1
-stuff=.1..1.
-stuff=.1..1.1
-stuff=.1..-.1
-stuff=.1..-1
-stuff=.1..-1.
-stuff=.1..-1.1
+stuff=.11...11
+stuff=.11..11
+stuff=.11..11.
+stuff=.11..11.11
+stuff=.11..-.11
+stuff=.11..-11
+stuff=.11..-11.
+stuff=.11..-11.11
 #
-stuff=1...1
-stuff=1..1
-stuff=1..1.
-stuff=1..1.1
-stuff=1..-.1
-stuff=1..-1
-stuff=1..-1.
-stuff=1..-1.1
+stuff=11...11
+stuff=11..11
+stuff=11..11.
+stuff=11..11.11
+stuff=11..-.11
+stuff=11..-11
+stuff=11..-11.
+stuff=11..-11.11
 #
-stuff=1....1
-stuff=1...1
-stuff=1...1.
-stuff=1...1.1
-stuff=1...-.1
-stuff=1...-1
-stuff=1...-1.
-stuff=1...-1.1
+stuff=11....11
+stuff=11...11
+stuff=11...11.
+stuff=11...11.11
+stuff=11...-.11
+stuff=11...-11
+stuff=11...-11.
+stuff=11...-11.11
 #
-stuff=1.1...1
-stuff=1.1..1
-stuff=1.1..1.
-stuff=1.1..1.1
-stuff=1.1..-.1
-stuff=1.1..-1
-stuff=1.1..-1.
-stuff=1.1..-1.1
+stuff=11.11...11
+stuff=11.11..11
+stuff=11.11..11.
+stuff=11.11..11.11
+stuff=11.11..-.11
+stuff=11.11..-11
+stuff=11.11..-11.
+stuff=11.11..-11.11
 ###
 ###
-stuff=-.1...1
-stuff=-.1..1
-stuff=-.1..1.
-stuff=-.1..1.1
-stuff=-.1..-.1
-stuff=-.1..-1
-stuff=-.1..-1.
-stuff=-.1..-1.1
+stuff=-.11...11
+stuff=-.11..11
+stuff=-.11..11.
+stuff=-.11..11.11
+stuff=-.11..-.11
+stuff=-.11..-11
+stuff=-.11..-11.
+stuff=-.11..-11.11
 #
-stuff=-1...1
-stuff=-1..1
-stuff=-1..1.
-stuff=-1..1.1
-stuff=-1..-.1
-stuff=-1..-1
-stuff=-1..-1.
-stuff=-1..-1.1
+stuff=-11...11
+stuff=-11..11
+stuff=-11..11.
+stuff=-11..11.11
+stuff=-11..-.11
+stuff=-11..-11
+stuff=-11..-11.
+stuff=-11..-11.11
 #
-stuff=-1....1
-stuff=-1...1
-stuff=-1...1.
-stuff=-1...1.1
-stuff=-1...-.1
-stuff=-1...-1
-stuff=-1...-1.
-stuff=-1...-1.1
+stuff=-11....11
+stuff=-11...11
+stuff=-11...11.
+stuff=-11...11.11
+stuff=-11...-.11
+stuff=-11...-11
+stuff=-11...-11.
+stuff=-11...-11.11
 #
-stuff=-1.1...1
-stuff=-1.1..1
-stuff=-1.1..1.
-stuff=-1.1..1.1
-stuff=-1.1..-.1
-stuff=-1.1..-1
-stuff=-1.1..-1.
-stuff=-1.1..-1.1
+stuff=-11.11...11
+stuff=-11.11..11
+stuff=-11.11..11.
+stuff=-11.11..11.11
+stuff=-11.11..-.11
+stuff=-11.11..-11
+stuff=-11.11..-11.
+stuff=-11.11..-11.11
 
 
 execute
@@ -263,120 +307,28 @@ advancement grant @s minecraft:...
 advancement revoke @s minecraft:...
 
 
-## 1.21.11 - 90+1 commands
-``{
-  run
-  advancement
-  attribute
-  ban
-  ban-ip
-  banlist
-  bossbar
-  clear
-  clone
-  damage
-  data
-  datapack
-  debug
-  defaultgamemode
-  deop
-  dialog
-  difficulty
-  effect
-  enchant
-  execute
-  experience/xp
-  fetchprofile
-  fill
-  fillbiome
-  forceload
-  function
-  gamemode
-  gamerule
-  give
-  help
-  item
-  jfr
-  kick
-  kill
-  list
-  locate
-  loot
-  me
-  msg/tell/w
-  op
-  pardon
-  pardon-ip
-  particle
-  perf
-  place
-  playsound
-  publish
-  random
-  recipe
-  reload
-  return
-  ride
-  rotate
-  run
-  save-all
-  save-off
-  save-on
-  say
-  schedule
-  scoreboard
-  seed
-  setblock
-  setidletimeout
-  setworldspawn
-  spawnpoint
-  spectate
-  spreadplayers
-  stop
-  stopsound
-  summon
-  swing
-  tag
-  team
-  teammsg/tm
-  teleport/tp
-  tellraw
-  test
-  tick
-  time
-  title
-  transfer
-  trigger
-  version
-  waypoint
-  weather
-  whitelist
-  worldborder
-}``
+## 1.21.11 - 90+2 commands
 
+run
+with
+trigger
 
-special commands:
 say
 execute
-run
 return
 function
 data
 tellraw
-trigger
-forceload
-schedule
-tick
 scoreboard
-
-common commands:
 advancement
 playsound
 title
 tp
 fill
 random
-###
+forceload
+schedule
+tick
 clear
 enchant
 experience
@@ -418,7 +370,6 @@ loot
 waypoint
 teleport
 
-misc commands:
 me
 teammsg
 tm
@@ -433,7 +384,6 @@ version
 fetchprofile
 swing
 
-online commands:
 perf
 save-all
 save-off
