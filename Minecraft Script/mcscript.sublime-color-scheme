@@ -79,6 +79,13 @@
       "scope":"mcs.mc.a",
       "foreground":"#ff5599",
     },
+    {},// line_cont
+    {
+      "scope":"mcs.line_cont",
+      "foreground":"#ffcc33",
+      "background":"#504812",
+      "font_style":"bold"
+    },
     {},
     {},// remarks
     {
@@ -98,8 +105,11 @@
     {},
     {},// comments
     {
-      "scope":"mcs.comment.double",
+      "scope":"mcs.comment.triple",
       "foreground":"#98cd98",
+    },{
+      "scope":"mcs.comment.double",
+      "foreground":"#87abc5",
     },{
       "scope":"mcs.comment.single",
       "foreground":"#8a8a8f",
@@ -115,7 +125,7 @@
     {},// commands
     {"scope":"mcs.command","foreground":"hsl(350, 100%, 75%)"},
     {"scope":"mcs.command.a","foreground":"hsl(140, 80%, 65%)"},
-    {"scope":"mcs.command.b","foreground":"hsl(180, 80%, 75%)"},
+    {"scope":"mcs.command.b","foreground":"hsl(190, 80%, 75%)"},
     {"scope":"mcs.command.c","foreground":"hsl(40, 100%, 75%)"},
     {"scope":"mcs.command.d","foreground":"hsl(355, 80%, 65%)"},
     {},
@@ -153,6 +163,7 @@
     },{
       "scope":"mcs.macro.arg",
       "foreground":"#ffaaff",
+      "background":"#434370cc",
     },
     {},
     {},// declarations
@@ -176,12 +187,6 @@
       "font_style":"bold"
     },
     {
-      "scope":"mcs.core.line_cont",
-      "foreground":"#ffcc33",
-      "background":"#504812",
-      "font_style":"bold"
-    },
-    {
       "scope":"mcs.core.bool.true",
       "foreground":"#47e563",
       "font_style":"bold"
@@ -197,7 +202,8 @@
     },
     {
       "scope":"mcs.core.number.range",
-      "foreground":"#aaffbb",
+      "foreground":"#55dd70",
+      "font_style":"bold"
     },
     {
       "scope":"mcs.core.operation",

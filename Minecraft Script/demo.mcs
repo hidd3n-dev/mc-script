@@ -3,18 +3,60 @@
 ** raze
 * remark
 
+
 # comment
 ## double comment
+### triple comment
+
+  # comment  
+    ## double comment  
+      ### triple comment  
+
+
+# comment\
+continues\
+then it
+does not
+
+## comment\
+continues\
+then it
+does not
+
+### comment\
+continues\
+then it
+does not
+
+# comment ``with`` * remarks ** inside
+## comment ``with`` * remarks ** inside
+### comment ``with`` * remarks ** inside
+
+  # comment\
+with\
+  ``lots\
+    of\
+      bloody``\
+        **functionality\
+          if*\
+            *I\
+              do**\
+                ````say\
+                  so````\
+                    *myself*! (idk how useful this is but it was fun to make lol)
+
 
 trailing line conts \\
- trailing spaces at command start
+trailing line conts \\  
 duplicate spaces  inside sentences
-trailing spaces at line end 
 /non truncated command entry
+  /non truncated command entry
 trailing integer number range dots: matches 11... , matches ...11 , matches 11...11, matches ...-11
 positive to negative number ranges: 11..-11, 11...-11, .11..-.11, .11...-.11, 11..-.11, 11...-.11, .11..-11, .11...-11
 trailing macro $$(call)
 $$trailing macro line
+  $$trailing macro line
+
 
 'contents of single quotes'
 "contents of double quotes"
@@ -29,10 +71,12 @@ escaped characters: "\a \b \c \d ... \\"
 n{e[s(t{e[d( [c]o)n]t}e)n]t}s
 
 $macro line
+  $macro line
 ... macro $(call)
 $macro call has invalid characters $(a.r!g?u,m:e-n't)
 
 line cont \
+line cont \  
 true and false
 11 11.11 11. .11 -11 -11.11 -11. -.11
 
@@ -191,7 +235,10 @@ run say hi
 "quote\"quote\"\"quote"
 "escape bonanza: \',\",\\,\b,\f,\n,\N,\r,\s,\t,\u,\U,\x"
 
+
 /execute as @n[distance=...5] run say hi
+
+/execute if items entity @s container.* * run say hi
 
 
 minecraft:
@@ -455,3 +502,199 @@ tell
 w
 kick
 list
+
+
+  execute
+  return
+  run
+  with
+  trigger
+
+  say
+  tellraw
+  function
+  data
+  scoreboard
+  schedule
+  forceload
+  tick
+
+  advancement
+  playsound
+  title
+  tp
+  fill
+  random
+  clear
+  enchant
+  experience
+  xp
+  gamemode
+  give
+  particle
+  recipe
+  spawnpoint
+  stopsound
+  datapack
+  defaultgamemode
+  difficulty
+  dialog
+  fillbiome
+  gamerule
+  setworldspawn
+  time
+  weather
+  worldborder
+  attribute
+  damage
+  effect
+  kill
+  ride
+  rotate
+  spectate
+  spreadplayers
+  tag
+  team
+  bossbar
+  summon
+  clone
+  setblock
+  place
+  locate
+  item
+  loot
+  waypoint
+  teleport
+
+  me
+  teammsg
+  tm
+  publish
+  debug
+  help
+  test
+  seed
+  reload
+  jfr
+  version
+  fetchprofile
+  swing
+
+  perf
+  save-all
+  save-off
+  save-on
+  stop
+  ban-ip
+  ban
+  banlist
+  deop
+  op
+  pardon-ip
+  pardon
+  setidletimeout
+  transfer
+  whitelist
+  msg
+  tell
+  w
+  kick
+  list
+
+
+  ... stuff ... execute
+  ... stuff ... return
+  ... stuff ... run
+  ... stuff ... with
+  ... stuff ... trigger
+
+  ... stuff ... say
+  ... stuff ... tellraw
+  ... stuff ... function
+  ... stuff ... data
+  ... stuff ... scoreboard
+  ... stuff ... schedule
+  ... stuff ... forceload
+  ... stuff ... tick
+
+  ... stuff ... advancement
+  ... stuff ... playsound
+  ... stuff ... title
+  ... stuff ... tp
+  ... stuff ... fill
+  ... stuff ... random
+  ... stuff ... clear
+  ... stuff ... enchant
+  ... stuff ... experience
+  ... stuff ... xp
+  ... stuff ... gamemode
+  ... stuff ... give
+  ... stuff ... particle
+  ... stuff ... recipe
+  ... stuff ... spawnpoint
+  ... stuff ... stopsound
+  ... stuff ... datapack
+  ... stuff ... defaultgamemode
+  ... stuff ... difficulty
+  ... stuff ... dialog
+  ... stuff ... fillbiome
+  ... stuff ... gamerule
+  ... stuff ... setworldspawn
+  ... stuff ... time
+  ... stuff ... weather
+  ... stuff ... worldborder
+  ... stuff ... attribute
+  ... stuff ... damage
+  ... stuff ... effect
+  ... stuff ... kill
+  ... stuff ... ride
+  ... stuff ... rotate
+  ... stuff ... spectate
+  ... stuff ... spreadplayers
+  ... stuff ... tag
+  ... stuff ... team
+  ... stuff ... bossbar
+  ... stuff ... summon
+  ... stuff ... clone
+  ... stuff ... setblock
+  ... stuff ... place
+  ... stuff ... locate
+  ... stuff ... item
+  ... stuff ... loot
+  ... stuff ... waypoint
+  ... stuff ... teleport
+
+  ... stuff ... me
+  ... stuff ... teammsg
+  ... stuff ... tm
+  ... stuff ... publish
+  ... stuff ... debug
+  ... stuff ... help
+  ... stuff ... test
+  ... stuff ... seed
+  ... stuff ... reload
+  ... stuff ... jfr
+  ... stuff ... version
+  ... stuff ... fetchprofile
+  ... stuff ... swing
+
+  ... stuff ... perf
+  ... stuff ... save-all
+  ... stuff ... save-off
+  ... stuff ... save-on
+  ... stuff ... stop
+  ... stuff ... ban-ip
+  ... stuff ... ban
+  ... stuff ... banlist
+  ... stuff ... deop
+  ... stuff ... op
+  ... stuff ... pardon-ip
+  ... stuff ... pardon
+  ... stuff ... setidletimeout
+  ... stuff ... transfer
+  ... stuff ... whitelist
+  ... stuff ... msg
+  ... stuff ... tell
+  ... stuff ... w
+  ... stuff ... kick
+  ... stuff ... list
