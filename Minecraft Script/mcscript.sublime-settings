@@ -1,5 +1,5 @@
 {
   "color_scheme": "mcscript.sublime-color-scheme",
   "spell_check": true,
-  "spelling_selector": "-mcs.remark -mcs.command -mcs.declare -mcs.mc",
+  "spelling_selector": "-mcs.remark -mcs.command -mcs.declare -mcs.mc -mcs.macro -mcs.core.call",
 }
