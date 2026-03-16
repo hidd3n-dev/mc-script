@@ -1,5 +1,8 @@
 # Minecraft Script
 
+> will add a promotional gif once I rework the color scheme, have got a pretty good concept in the works
+
+## About
 A Sublime Text package providing syntax highlighting to `.mcfunction` files used in Minecraft data packs development.
 
 Also works with `.mcs` and `.mcf` file extensions for convenience sake.
