@@ -181,13 +181,13 @@ contexts:
     - match: '#*[0-9A-Za-z_\-\.]+='
       scope: mcs.declare.equal
     #
-    - match: '(?<=[:=])(?=[a-zA-Z0-9\-\._])'
+    - match: '(?<=[:=])(?=[a-zA-Z0-9\-\._!])'
       push:
         - include: line_cont
         - include: remarks
         - include: errors
         - include: macros
-        - match: '/'
+        - match: '/|\.|!'
           scope: mcs.declare.separator
         - match: '(?=[^a-zA-Z0-9\-\._/])|$'
           pop: true
@@ -272,7 +272,7 @@ contexts:
     - match: '\['
       scope: mcs.wrap.b
       push: wraps_b
-    - match: '\{'
+    - match: '{'
       scope: mcs.wrap.b
       push: wraps_b
     #
@@ -304,7 +304,7 @@ contexts:
     - match: '\['
       scope: mcs.wrap.a
       push: wraps_a
-    - match: '\{'
+    - match: '{'
       scope: mcs.wrap.a
       push: wraps_a
     #

@@ -88,6 +88,48 @@ true and false
 -11..11
 -11..-11
 
+1B, 1b (byte)
+1S, 1s (short)
+1I, 1i (int)
+1L, 1l (long)
+1.1F, 1.1f (float)
+1.1D, 1.1d (double)
+``
+    {"scope":"mcs.core.number.byte","foreground":"hsl(350, 100%, 60%)"},
+    {"scope":"mcs.core.number.short","foreground":"hsl(295, 100%, 70%)"},
+    {"scope":"mcs.core.number.int","foreground":"hsl(240, 100%, 75%)"},
+    {"scope":"mcs.core.number.long","foreground":"hsl(180, 65%, 45%)"},
+    {"scope":"mcs.core.number.float","foreground":"hsl(45, 85%, 60%)"},
+    {"scope":"mcs.core.number.double","foreground":"hsl(130, 60%, 55%)"},
+``
+
+[B;1b,2b,3b] (byte)
+[I;1b,2s,3i] (int)
+[L;1b,2s,3i,4l] (long)
+``
+    # array data
+    - match: 'B(?=;)'
+      scope: mcs.core.array.byte
+    - match: 'I(?=;)'
+      scope: mcs.core.array.int
+    - match: 'L(?=;)'
+      scope: mcs.core.array.long
+````
+      "scope":"mcs.core.array.byte",
+      "foreground":"hsl(30, 75%, 70%)",
+      "font_style":"italic"
+    },
+    {
+      "scope":"mcs.core.array.int",
+      "foreground":"hsl(200, 100%, 65%)",
+      "font_style":"italic"
+    },
+    {
+      "scope":"mcs.core.array.long",
+      "foreground":"hsl(190, 80%, 65%)",
+      "font_style":"italic"
+``
+
 = += -= *= /= %= >< < > <= >=
 
 @p @r @a @e @s @n
@@ -220,7 +262,7 @@ uuid(str) uuid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
 ... "#Declare:specify"=
 
 
-complex.path."to:something".new.awaits.'but.don\'t'.you.DARE.__go__.hollow:a.b.c/d/e/f
+complex.path."to:something".new.awaits.'but.don\'t'.you.DARE.__go__.hollow:!a.b.c./d/e/f
 
 
 say hi
@@ -237,7 +279,7 @@ run say hi
 
 
 /execute as @n[distance=...5] run say hi
-
+/execute as @n[tag=!this] run say hi
 /execute if items entity @s container.* * run say hi
 
 
