@@ -60,7 +60,9 @@ $$trailing macro line
 
 'contents of single quotes'
 "contents of double quotes"
-escaped characters: "\a \b \c \d ... \\"
+
+'escape bonanza: \',\",\\,\b,\f,\n,\r,\s,\t,\x16,\u1111,\U22223333,\N{agatoro}'
+"escape bonanza: \',\",\\,\b,\f,\n,\r,\s,\t,\x16,\u1111,\U22223333,\N{atsuo}"
 
 ((((contents of parentheses))))
 [[[[contents of brackets]]]]
@@ -78,8 +80,35 @@ $macro call has invalid characters $(a.r!g?u,m:e-n't)
 line cont \
 line cont \  
 true and false
-11 11.11 11. .11 -11 -11.11 -11. -.11
 
+11
+11.11
+11.
+.11
+-11
+-11.11
+-11.
+-.11
+
+11_11
+11_11.11_11
+11_11.
+.11_11
+-11_11
+-11_11.11_11
+-11_11.
+-.11_11
+
+11_11
+11_11.11_11
+11_11.
+.11_11
+-11_11
+-11_11.11_11
+-11_11.
+-.11_11
+
+* underscores are unsupported in ranges
 11..
 11.. 
 ..11
@@ -88,10 +117,87 @@ true and false
 -11..11
 -11..-11
 
+11b 11B 11sb 11sB 11Sb 11SB 11ub 11uB 11Ub 11UB
+11_11b 11_11B 11_11sb 11_11sB 11_11Sb 11_11SB 11_11ub 11_11uB 11_11Ub 11_11UB
+-11b -11B -11sb -11sB -11Sb -11SB -11ub -11uB -11Ub -11UB
+-11_11b -11_11B -11_11sb -11_11sB -11_11Sb -11_11SB -11_11ub -11_11uB -11_11Ub -11_11UB
+
+11s 11S 11ss 11sS 11Ss 11SS 11us 11uS 11Us 11US
+11_11s 11_11S 11_11ss 11_11sS 11_11Ss 11_11SS 11_11us 11_11uS 11_11Us 11_11US
+-11s -11S -11ss -11sS -11Ss -11SS -11us -11uS -11Us -11US
+-11_11s -11_11S -11_11ss -11_11sS -11_11Ss -11_11SS -11_11us -11_11uS -11_11Us -11_11US
+
+11i 11I 11si 11sI 11Si 11SI 11ui 11uI 11Ui 11UI
+11_11i 11_11I 11_11si 11_11sI 11_11Si 11_11SI 11_11ui 11_11uI 11_11Ui 11_11UI
+-11i -11I -11si -11sI -11Si -11SI -11ui -11uI -11Ui -11UI
+-11_11i -11_11I -11_11si -11_11sI -11_11Si -11_11SI -11_11ui -11_11uI -11_11Ui -11_11UI
+
+11l 11L 11sl 11sL 11Sl 11SL 11ul 11uL 11Ul 11UL
+11_11l 11_11L 11_11sl 11_11sL 11_11Sl 11_11SL 11_11ul 11_11uL 11_11Ul 11_11UL
+-11l -11L -11sl -11sL -11Sl -11SL -11ul -11uL -11Ul -11UL
+-11_11l -11_11L -11_11sl -11_11sL -11_11Sl -11_11SL -11_11ul -11_11uL -11_11Ul -11_11UL
+
+11_11.f 11_11.F 11_11.e11_11f 11_11.e11_11F 11_11.E11_11f 11_11.E11_11F
+11_11.11_11f 11_11.11_11F 11_11.11_11e11_11f 11_11.11_11e11_11F 11_11.11_11E11_11f 11_11.11_11E11_11F
+.11_11f .11_11F .11_11e11_11f .11_11e11_11F .11_11E11_11f .11_11E11_11F
+-11_11.f -11_11.F -11_11.e11_11f -11_11.e11_11F -11_11.E11_11f -11_11.E11_11F
+-11_11.11_11f -11_11.11_11F -11_11.11_11e11_11f -11_11.11_11e11_11F -11_11.11_11E11_11f -11_11.11_11E11_11F
+-.11_11f -.11_11F -.11_11e11_11f -.11_11e11_11F -.11_11E11_11f -.11_11E11_11F
+
+11_11.e-11_11f 11_11.e-11_11F 11_11.E-11_11f 11_11.E-11_11F
+11_11.11_11e-11_11f 11_11.11_11e-11_11F 11_11.11_11E-11_11f 11_11.11_11E-11_11F
+.11_11e-11_11f .11_11e-11_11F .11_11E-11_11f .11_11E-11_11F
+-11_11.e-11_11f -11_11.e-11_11F -11_11.E-11_11f -11_11.E-11_11F
+-11_11.11_11e-11_11f -11_11.11_11e-11_11F -11_11.11_11E-11_11f -11_11.11_11E-11_11F
+-.11_11e-11_11f -.11_11e-11_11F -.11_11E-11_11f -.11_11E-11_11F
+
+11_11.d 11_11.D 11_11.e11_11d 11_11.e11_11D 11_11.E11_11d 11_11.E11_11D
+11_11.11_11d 11_11.11_11D 11_11.11_11e11_11d 11_11.11_11e11_11D 11_11.11_11E11_11d 11_11.11_11E11_11D
+.11_11d .11_11D .11_11e11_11d .11_11e11_11D .11_11E11_11d .11_11E11_11D
+-11_11.d -11_11.D -11_11.e11_11d -11_11.e11_11D -11_11.E11_11d -11_11.E11_11D
+-11_11.11_11d -11_11.11_11D -11_11.11_11e11_11d -11_11.11_11e11_11D -11_11.11_11E11_11d -11_11.11_11E11_11D
+-.11_11d -.11_11D -.11_11e11_11d -.11_11e11_11D -.11_11E11_11d -.11_11E11_11D
+
+11_11.e-11_11d 11_11.e-11_11D 11_11.E-11_11d 11_11.E-11_11D
+11_11.11_11e-11_11d 11_11.11_11e-11_11D 11_11.11_11E-11_11d 11_11.11_11E-11_11D
+.11_11e-11_11d .11_11e-11_11D .11_11E-11_11d .11_11E-11_11D
+-11_11.e-11_11d -11_11.e-11_11D -11_11.E-11_11d -11_11.E-11_11D
+-11_11.11_11e-11_11d -11_11.11_11e-11_11D -11_11.11_11E-11_11d -11_11.11_11E-11_11D
+-.11_11e-11_11d -.11_11e-11_11D -.11_11E-11_11d -.11_11E-11_11D
+
+11_11. 11_11. 11_11.e11_11 11_11.e11_11 11_11.E11_11 11_11.E11_11
+11_11.11_11 11_11.11_11 11_11.11_11e11_11 11_11.11_11e11_11 11_11.11_11E11_11 11_11.11_11E11_11
+.11_11 .11_11 .11_11e11_11 .11_11e11_11 .11_11E11_11 .11_11E11_11
+-11_11. -11_11. -11_11.e11_11 -11_11.e11_11 -11_11.E11_11 -11_11.E11_11
+-11_11.11_11 -11_11.11_11 -11_11.11_11e11_11 -11_11.11_11e11_11 -11_11.11_11E11_11 -11_11.11_11E11_11
+-.11_11 -.11_11 -.11_11e11_11 -.11_11e11_11 -.11_11E11_11 -.11_11E11_11
+
+11_11.e-11_11 11_11.e-11_11 11_11.E-11_11 11_11.E-11_11
+11_11.11_11e-11_11 11_11.11_11e-11_11 11_11.11_11E-11_11 11_11.11_11E-11_11
+.11_11e-11_11 .11_11e-11_11 .11_11E-11_11 .11_11E-11_11
+-11_11.e-11_11 -11_11.e-11_11 -11_11.E-11_11 -11_11.E-11_11
+-11_11.11_11e-11_11 -11_11.11_11e-11_11 -11_11.11_11E-11_11 -11_11.11_11E-11_11
+-.11_11e-11_11 -.11_11e-11_11 -.11_11E-11_11 -.11_11E-11_11
+
+[B;1b,2b,3b]
+[I;1b,2s,3i]
+[L;1b,2s,3i,4l]
+
+-16b -16sb 240uB 15s 15sS 15Us
+0xabc 0xdef 0x11sb
+0x0_1__2___3____4_____5______6_______7Ui
+0b0 0b100 0b1_0_0
+
+"\x42"
+"\u2604"
+"\U00051020"
+"\N{Snowman}"
+
 = += -= *= /= %= >< < > <= >=
 
 @p @r @a @e @s @n
 
+* underscores are unsupported in vectors
 ~ ~ ~ ... ~11 ~ ~ ... ~.11 ~ ~ ... ~11. ~ ~ ... ~-11 ~ ~ ... ~-.11 ~ ~ ... ~-11. ~ ~
 ^ ^ ^ ... ^11 ^ ^ ... ^.11 ^ ^ ... ^11. ^ ^ ... ^-11 ^ ^ ... ^-.11 ^ ^ ... ^-11. ^ ^
 
@@ -215,12 +321,77 @@ uuid(str) uuid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
 ... #Declare:
 ... '#Declare:specify':
 ... "#Declare:specify":
+... '#Declare:specify':{}
+... "#Declare:specify":{}
+... '#Declare:specify':[]
+... "#Declare:specify":[]
+... ['#Declare:specify':{}]
+... ["#Declare:specify":{}]
+... {'#Declare:specify':[]}
+... {"#Declare:specify":[]}
 ... #Declare=
 ... '#Declare:specify'=
 ... "#Declare:specify"=
+... '#Declare:specify'={}
+... "#Declare:specify"={}
+... '#Declare:specify'=[]
+... "#Declare:specify"=[]
+... ['#Declare:specify'={}]
+... ["#Declare:specify"={}]
+... {'#Declare:specify'=[]}
+... {"#Declare:specify"=[]}
 
 
-complex.path."to:something".new.awaits.'but.don\'t'.you.DARE.__go__.hollow:a.b.c/d/e/f
+minecraft:
+'minecraft:declare'
+"minecraft:declare"
+'minecraft:declare':
+"minecraft:declare":
+'minecraft:declare'=
+"minecraft:declare"=
+'minecraft:declare':{}
+"minecraft:declare":{}
+'minecraft:declare'={}
+"minecraft:declare"={}
+'minecraft:declare':[]
+"minecraft:declare":[]
+'minecraft:declare'=[]
+"minecraft:declare"=[]
+['minecraft:declare':{}]
+["minecraft:declare":{}]
+['minecraft:declare'={}]
+["minecraft:declare"={}]
+{'minecraft:declare':[]}
+{"minecraft:declare":[]}
+{'minecraft:declare'=[]}
+{"minecraft:declare"=[]}
+
+#minecraft:
+'#minecraft:declare'
+"#minecraft:declare"
+'#minecraft:declare':
+"#minecraft:declare":
+'#minecraft:declare'=
+"#minecraft:declare"=
+'#minecraft:declare':{}
+"#minecraft:declare":{}
+'#minecraft:declare'={}
+"#minecraft:declare"={}
+'#minecraft:declare':[]
+"#minecraft:declare":[]
+'#minecraft:declare'=[]
+"#minecraft:declare"=[]
+['#minecraft:declare':{}]
+["#minecraft:declare":{}]
+['#minecraft:declare'={}]
+["#minecraft:declare"={}]
+{'#minecraft:declare':[]}
+{"#minecraft:declare":[]}
+{'#minecraft:declare'=[]}
+{"#minecraft:declare"=[]}
+
+
+complex.path."to:something".new.awaits.'but.don\'t'.you.DARE.__go__.hollow:!a.b.c./d/e/f
 
 
 say hi
@@ -228,38 +399,64 @@ run say hi
 
 {d:{d={d={d:{d={d={d:{d={aa{bb}aa}c}c}c}c}c}c}c}c}
 
+{one: 1, two: "abc123", tree: {}}
+{X:3,Y:64,Z:129}
+
 ""
 "quote"
 "quote\""
 "quote\"quote"
 "quote\"quote\"\"quote"
-"escape bonanza: \',\",\\,\b,\f,\n,\N,\r,\s,\t,\u,\U,\x"
 
 
 /execute as @n[distance=...5] run say hi
-
+/execute as @n[tag=!this] run say hi
 /execute if items entity @s container.* * run say hi
 
+execute in minecraft:overworld run say something!
+execute in aether:cloud_9 run say something!
 
-minecraft:
-'minecraft:'
-"minecraft:"
-'minecraft:':
-"minecraft:":
-'minecraft:'=
-"minecraft:"=
+
+execute on attacker align xyz anchored eyes facing entity @r feet positioned over ...
+execute on controller align xzy anchored eyes facing entity @r feet positioned over ...
+execute on leasher align yxz anchored eyes facing entity @r feet positioned over ...
+execute on origin align yzx anchored eyes facing entity @r feet positioned over ...
+execute on owner align zxy anchored eyes facing entity @r feet positioned over ...
+execute on passengers align zyx anchored eyes facing entity @r feet positioned over ...
+execute on target align xy anchored eyes facing entity @r feet positioned over ...
+execute on vehicle align xz anchored eyes facing entity @r feet positioned over ...
+execute on vehicle align yx anchored eyes facing entity @r feet positioned over ...
+execute on vehicle align yz anchored eyes facing entity @r feet positioned over ...
+execute on vehicle align zx anchored eyes facing entity @r feet positioned over ...
+execute on vehicle align zy anchored eyes facing entity @r feet positioned over ...
+execute on vehicle align x anchored eyes facing entity @r feet positioned over ...
+execute on vehicle align y anchored eyes facing entity @r feet positioned over ...
+execute on vehicle align z anchored eyes facing entity @r feet positioned over ...
+
+
+execute store success storage a:b c byte 1 run random value 1..20
+execute store success storage a:b c short 1 run random value 1..20
+execute store success storage a:b c int 1 run random value 1..20
+execute store result storage a:b c long 1 run random value 1..20
+execute store result storage a:b c float 1.0 run random value 1..20
+execute store result storage a:b c double 1.0 run random value 1..20
 
 
 function namespace:path/to/function with entity @s
 function namespace:path/to/function with storage namespace:database a.b.c
+
 
 execute if ... unless ...
 
 execute store result ...
 execute store success ...
 
+title @s actionbar "okaeri"
+
 scoreboard objectives add obj0 trigger
-scoreboard objectives add obj0 dummy
+scoreboard objectives add obj1 dummy
+
+scoreboard objectives setdisplay sidebar obj1
 
 execute if score @s obj0 matches 11.. run say hi
 execute unless score @s obj0 matches 11.. run say hi
@@ -300,6 +497,7 @@ stuff=a/b/c/d/e
 {{[[{{[[((stuff=?))]]}}]]}}
 
 
+* underscores are unsupported in ranges
 stuff=...11
 stuff=..11
 stuff=..11.
@@ -391,17 +589,6 @@ stuff=-11.11..-11
 stuff=-11.11..-11.
 stuff=-11.11..-11.11
 
-
-execute
-run
-return
-
-{X:3,Y:64,Z:129}
-{foo: 1, bar: "abc123", baz: {}}
-
-execute as ... run advancement grant @s minecraft:...
-advancement grant @s minecraft:...
-advancement revoke @s minecraft:...
 
 
 ## 1.21.11 - 90+2 commands

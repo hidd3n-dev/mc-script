@@ -8,6 +8,11 @@ file_extensions:
 scope: mcs
 author: "hidd3n-dev"
 
+variables:
+  Escapes: '\\[bfnrst\''"\\]|\\x[[:xdigit:]]{2}|\\u[[:xdigit:]]{4}|\\U[[:xdigit:]]{8}|\\N{[0-9a-zA-Z_]+}'
+  Decimals: '\d+\.?\d*|\.?\d+'
+  Int_: '\d(?:_*\d)*'
+
 contexts:
 
   main:
@@ -18,6 +23,7 @@ contexts:
     - include: errors
     - include: wraps
     - include: macros
+    - include: numbers
     - include: core
     - include: commands
     - include: declarations
@@ -114,7 +120,7 @@ contexts:
         - include: macros
         - meta_scope: mcs.quotes.single
         - meta_content_scope: mcs.quotes.single.body
-        - match: '\\\S'
+        - match: '{{Escapes}}'
           scope: mcs.quotes.escape
         - match: '\'''
           pop: true
@@ -127,7 +133,7 @@ contexts:
         - include: macros
         - meta_scope: mcs.quotes
         - meta_content_scope: mcs.quotes.body
-        - match: '\\\S'
+        - match: '{{Escapes}}'
           scope: mcs.quotes.escape
         - match: '"'
           pop: true
@@ -163,57 +169,153 @@ contexts:
 
 
   declarations:
-    - match: '(?:"#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+):(?=[\[{])'
-      scope: mcs.declare.colon.object
-    - match: '"#*[0-9A-Za-z_\-\.:]+":'
-      scope: mcs.declare.colon.quotes
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\'':'
-      scope: mcs.declare.colon.quotes
-    - match: '#*[0-9A-Za-z_\-\.]+:'
-      scope: mcs.declare.colon
+    - match: '(?=#*[0-9A-Za-z_\-\.]+:[\[{])'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.declare.colon.object
+        - match: ':'
+          scope: mcs.mc
+          pop: true
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''):[\[{])'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.declare.colon.object
+        - match: '\'''
+          scope: mcs.quotes
+        - match: '(?<=\''):'
+          scope: mcs.mc
+          pop: true
+        - match: '"'
+          scope: mcs.quotes
+        - match: '(?<="):'
+          scope: mcs.mc
+          pop: true
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''):)'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.declare.colon.quotes
+        - match: '\'''
+          scope: mcs.quotes.single
+        - match: '(?<=\''):'
+          scope: mcs.mc
+          pop: true
+        - match: '"'
+          scope: mcs.quotes.single
+        - match: '(?<="):'
+          scope: mcs.mc
+          pop: true
+    - match: '(#*[0-9A-Za-z_\-\.]+)(:)'
+      captures: {1: mcs.declare.colon, 2: mcs.mc}
     #
-    - match: '(?:"#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+)=(?=[\[{])'
-      scope: mcs.declare.equal.object
-    - match: '"#*[0-9A-Za-z_\-\.:]+"='
-      scope: mcs.declare.equal.quotes
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\''='
-      scope: mcs.declare.equal.quotes
-    - match: '#*[0-9A-Za-z_\-\.]+='
-      scope: mcs.declare.equal
     #
-    - match: '(?<=[:=])(?=[a-zA-Z0-9\-\._])'
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+)=[\[{])'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.declare.equal.object
+        - match: '\'''
+          scope: mcs.quotes
+        - match: '"'
+          scope: mcs.quotes
+        - match: '='
+          scope: mcs.mc
+          pop: true
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\'')=)'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.declare.equal.quotes
+        - match: '\'''
+          scope: mcs.quotes.single
+        - match: '"'
+          scope: mcs.quotes.single
+        - match: '='
+          scope: mcs.mc
+          pop: true
+    - match: '(#*[0-9A-Za-z_\-\.]+)(=)'
+      captures: {1: mcs.declare.equal, 2: mcs.mc}
+    #
+    #
+    - match: '(?<=[:=])(?=[a-zA-Z0-9\-\._!])'
       push:
         - include: line_cont
         - include: remarks
         - include: errors
         - include: macros
-        - match: '/'
+        - meta_scope: mcs.declare
+        - match: '/|\.|!'
           scope: mcs.declare.separator
         - match: '(?=[^a-zA-Z0-9\-\._/])|$'
           pop: true
 
 
-  core:
-    - match: '(?:(?:\d+\.\d+|\d+\.?|\.?\d+)|-(?:\d+\.\d+|\d+\.?|\.?\d+))\.{2}(?:(?:\d+\.\d+|\d+\.?|\.?\d+)|-(?:\d+\.\d+|\d+\.?|\.?\d+))'
-      scope: mcs.core.number.range
-    - match: '\.{2}(?:(?:\d+\.\d+|\d+\.?|\.?\d+)|-(?:\d+\.\d+|\d+\.?|\.?\d+))'
-      scope: mcs.core.number.range
-    - match: '(?:(?:\d+\.\d+|\d+\.?|\.?\d+)|-(?:\d+\.\d+|\d+\.?|\.?\d+))\.{2}'
-      scope: mcs.core.number.range
-    - match: '-*\d+\.{2}(?:-\d+|\d*)'
-      scope: mcs.core.number.range
-    - match: '\.{2}(?:-*\d+)'
-      scope: mcs.core.number.range
+  numbers:
+    - match: '(?:(?:{{Decimals}})|-(?:{{Decimals}}))\.{2}(?:(?:{{Decimals}})|-(?:{{Decimals}}))'
+      scope: mcs.number.range
+    - match: '\.{2}(?:(?:{{Decimals}})|-(?:{{Decimals}}))'
+      scope: mcs.number.range
+    - match: '(?:(?:{{Decimals}})|-(?:{{Decimals}}))\.{2}'
+      scope: mcs.number.range
+    - match: '-?\d+\.{2}(?:-\d+|\d*)'
+      scope: mcs.number.range
+    - match: '\.{2}(?:-?\d+)'
+      scope: mcs.number.range
     #
-    - match: '(?<!\w)-*\d*\.\d+(?!\w)'
-      scope: mcs.core.number
-    - match: '(?<!\w)-*\d+\.*(?!\w)'
-      scope: mcs.core.number
+    # floats
+    - match: '(?<!\w)(-?(?:\d*|{{Int_}})\.{{Int_}}|-?{{Int_}}\.?)(?:([eE])(-?{{Int_}}))?([fF])(?!\w)'
+      captures: {1: mcs.number, 2: mcs.number.type, 3: mcs.number, 4: mcs.number.type.float}
+    - match: '(?<!\w)(-?(?:\d*|{{Int_}})\.{{Int_}}|-?{{Int_}}\.?)(?:([eE])(-?{{Int_}}))?([dD]?)(?!\w)'
+      captures: {1: mcs.number, 2: mcs.number.type, 3: mcs.number, 4: mcs.number.type.double}
+    #
+    # integers
+    - match: '(?<!\w)(-?{{Int_}})([uUsS]?)([bB])(?!\w)'
+      captures: {1: mcs.number, 2: mcs.number.type, 3: mcs.number.type.byte}
+    - match: '(?<!\w)(-?{{Int_}})([uUsS]?)([sS])(?!\w)'
+      captures: {1: mcs.number, 2: mcs.number.type, 3: mcs.number.type.short}
+    - match: '(?<!\w)(-?{{Int_}})(?:([uUsS]?)([iI])|[iI]?)(?!\w)'
+      captures: {1: mcs.number, 2: mcs.number.type, 3: mcs.number.type.int}
+    - match: '(?<!\w)(-?{{Int_}})([uUsS]?)([lL])(?!\w)'
+      captures: {1: mcs.number, 2: mcs.number.type, 3: mcs.number.type.long}
+    - match: '(?<!\w)(0b)(\d(?:_*\d){0,2})(?!\w)'
+      captures:
+        1: mcs.number.type.byte
+        2: mcs.number
+    - match: '(?<!\w)(0x)([[:xdigit:]](?:_*[[:xdigit:]])*)([uUsS])([bB])(?!\w)'
+      captures: {1: mcs.number.type, 2: mcs.number, 3: mcs.number.type, 4: mcs.number.type.byte}
+    - match: '(?<!\w)(0x)([[:xdigit:]](?:_*[[:xdigit:]])*)([uUsS]?)([sS])(?!\w)'
+      captures: {1: mcs.number.type, 2: mcs.number, 3: mcs.number.type, 4: mcs.number.type.short}
+    - match: '(?<!\w)(0x)([[:xdigit:]](?:_*[[:xdigit:]])*)(?:([uUsS]?)([iI])|[iI]?)(?!\w)'
+      captures: {1: mcs.number.type, 2: mcs.number, 3: mcs.number.type, 4: mcs.number.type.int}
+    - match: '(?<!\w)(0x)([[:xdigit:]](?:_*[[:xdigit:]])*)([uUsS]?)([lL])(?!\w)'
+      captures: {1: mcs.number.type, 2: mcs.number, 3: mcs.number.type, 4: mcs.number.type.long}
+
+
+  core:
+    # array data
+    - match: 'B(?=;)'
+      scope: mcs.core.array.byte
+    - match: 'I(?=;)'
+      scope: mcs.core.array.int
+    - match: 'L(?=;)'
+      scope: mcs.core.array.long
     #
     - match: '(?<!\w)(?:=|\+=|-=|\*=|/=|%=|><|<|>|<=|>=)(?!\w)'
       scope: mcs.core.operation
     - match: '(?<!\w)@(?:p|r|a|e|s|n)(?!\w)'
-      scope: mcs.core.target_selector
+      scope: mcs.core.tarsel
     - match: '(?<!\S)~(?=[\t\s\d\.\-\\$]|$)'
       scope: mcs.core.tilde
     - match: '(?<!\S)\^(?=[\t\s\d\.\-\\$]|$)'
@@ -251,6 +353,26 @@ contexts:
       scope: mcs.command
     - match: '(?:(?<=run )|^[^\S\n]*)\b(?:execute|return|advancement|playsound|title|tp|fill|random|clear|enchant|experience|xp|gamemode|give|particle|recipe|spawnpoint|stopsound|datapack|defaultgamemode|difficulty|dialog|fillbiome|gamerule|setworldspawn|time|weather|worldborder|attribute|damage|effect|kill|ride|rotate|spectate|spreadplayers|tag|team|bossbar|summon|clone|setblock|place|locate|item|loot|waypoint|teleport|me|teammsg|tm|publish|debug|help|test|seed|reload|jfr|version|fetchprofile|swing|perf|save-all|save-off|save-on|stop|ban-ip|ban|banlist|deop|op|pardon-ip|pardon|setidletimeout|transfer|whitelist|msg|tell|w|kick|list)\b'
       scope: mcs.command
+    #
+    - match: '\b(?:eyes|feet|over|setdisplay|actionbar|gametime)\b'
+      scope: mcs.command
+    - match: '(?<=align )(?:[xyz]|x[yz]|y[xz]|z[yx]|xyz|xzy|yxz|yzx|zxy|zyx)\b'
+      scope: mcs.command
+    - match: '\b(?:attacker|controller|leasher|origin|owner|passengers|target|vehicle)\b'
+      scope: mcs.command
+    #
+    - match: '\bbyte\b'
+      scope: mcs.number.type.byte
+    - match: '\bshort\b'
+      scope: mcs.number.type.short
+    - match: '\bint\b'
+      scope: mcs.number.type.int
+    - match: '\blong\b'
+      scope: mcs.number.type.long
+    - match: '\bfloat\b'
+      scope: mcs.number.type.float
+    - match: '\bdouble\b'
+      scope: mcs.number.type.double
 
 
 
@@ -261,6 +383,7 @@ contexts:
     - include: comments
     - include: errors
     - include: macros
+    - include: numbers
     - include: core
     #- include: commands
     - include: declarations
@@ -272,7 +395,7 @@ contexts:
     - match: '\['
       scope: mcs.wrap.b
       push: wraps_b
-    - match: '\{'
+    - match: '{'
       scope: mcs.wrap.b
       push: wraps_b
     #
@@ -293,6 +416,7 @@ contexts:
     - include: comments
     - include: errors
     - include: macros
+    - include: numbers
     - include: core
     #- include: commands
     - include: declarations
@@ -304,7 +428,7 @@ contexts:
     - match: '\['
       scope: mcs.wrap.a
       push: wraps_a
-    - match: '\{'
+    - match: '{'
       scope: mcs.wrap.a
       push: wraps_a
     #
