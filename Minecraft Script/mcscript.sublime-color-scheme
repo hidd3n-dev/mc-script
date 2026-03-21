@@ -180,11 +180,48 @@
     {"scope":"mcs.declare.equal.quotes","foreground":"hsl(340, 100%, 80%)"},
     {"scope":"mcs.declare.equal","foreground":"hsl(30, 80%, 75%)"},
     {},
+    {},// numbers
+    {
+      "scope":"mcs.number",
+      "foreground":"#ffd480",
+    },
+    {
+      "scope":"mcs.number.type",
+      "foreground":"#eeeeee",
+      "font_style":"bold"
+    },
+    {"scope":"mcs.number.type.byte","foreground":"hsl(350, 100%, 60%)"},
+    {"scope":"mcs.number.type.short","foreground":"hsl(295, 100%, 70%)"},
+    {"scope":"mcs.number.type.int","foreground":"hsl(240, 100%, 75%)"},
+    {"scope":"mcs.number.type.long","foreground":"hsl(180, 65%, 45%)"},
+    {"scope":"mcs.number.type.float","foreground":"hsl(45, 85%, 60%)"},
+    {"scope":"mcs.number.type.double","foreground":"hsl(130, 60%, 55%)"},
+    {
+      "scope":"mcs.number.range",
+      "foreground":"#55dd70",
+      "font_style":"bold"
+    },
+    {},
     {},// core
     {
       "scope":"mcs.core.access",
       "foreground":"#ff5599",
       "font_style":"bold"
+    },
+    {
+      "scope":"mcs.core.array.byte",
+      "foreground":"hsl(30, 75%, 70%)",
+      "font_style":"italic"
+    },
+    {
+      "scope":"mcs.core.array.int",
+      "foreground":"hsl(200, 100%, 65%)",
+      "font_style":"italic"
+    },
+    {
+      "scope":"mcs.core.array.long",
+      "foreground":"hsl(190, 80%, 65%)",
+      "font_style":"italic"
     },
     {
       "scope":"mcs.core.bool.true",
@@ -197,21 +234,12 @@
       "font_style":"italic"
     },
     {
-      "scope":"mcs.core.number",
-      "foreground":"#ffd480",
-    },
-    {
-      "scope":"mcs.core.number.range",
-      "foreground":"#55dd70",
-      "font_style":"bold"
-    },
-    {
       "scope":"mcs.core.operation",
       "foreground":"#88ff88",
       "font_style":"bold"
     },
     {
-      "scope":"mcs.core.target_selector",
+      "scope":"mcs.core.tarsel",
       "foreground":"#ffcc77",
     },
     {
