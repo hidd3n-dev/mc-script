@@ -23,6 +23,11 @@ data modify storage abc:st 0.b set value 1.1E1_1D
 #execute as @n[distance=1_1.1..] run say sheep!
 execute as @n[distance=11.1..] run say sheep!
 
+#tp ~ ~1_1.1 ~
+#execute at @s run tp ~ ~-.1_1 ~
+tp ~ ~11.1 ~
+execute at @s run tp ~ ~-.11 ~
+
 scoreboard objectives add aaa dummy
 scoreboard objectives setdisplay sidebar aaa
 

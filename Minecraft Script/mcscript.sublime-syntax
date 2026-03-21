@@ -169,23 +169,85 @@ contexts:
 
 
   declarations:
-    - match: '(?:"#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+):(?=[\[{])'
-      scope: mcs.declare.colon.object
-    - match: '"#*[0-9A-Za-z_\-\.:]+":'
-      scope: mcs.declare.colon.quotes
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\'':'
-      scope: mcs.declare.colon.quotes
-    - match: '#*[0-9A-Za-z_\-\.]+:'
-      scope: mcs.declare.colon
+    - match: '(?=#*[0-9A-Za-z_\-\.]+:[\[{])'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.declare.colon.object
+        - match: ':'
+          scope: mcs.mc
+          pop: true
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''):[\[{])'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.declare.colon.object
+        - match: '\'''
+          scope: mcs.quotes
+        - match: '(?<=\''):'
+          scope: mcs.mc
+          pop: true
+        - match: '"'
+          scope: mcs.quotes
+        - match: '(?<="):'
+          scope: mcs.mc
+          pop: true
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''):)'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.declare.colon.quotes
+        - match: '\'''
+          scope: mcs.quotes.single
+        - match: '(?<=\''):'
+          scope: mcs.mc
+          pop: true
+        - match: '"'
+          scope: mcs.quotes.single
+        - match: '(?<="):'
+          scope: mcs.mc
+          pop: true
+    - match: '(#*[0-9A-Za-z_\-\.]+)(:)'
+      captures: {1: mcs.declare.colon, 2: mcs.mc}
     #
-    - match: '(?:"#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+)=(?=[\[{])'
-      scope: mcs.declare.equal.object
-    - match: '"#*[0-9A-Za-z_\-\.:]+"='
-      scope: mcs.declare.equal.quotes
-    - match: '\''#*[0-9A-Za-z_\-\.:]+\''='
-      scope: mcs.declare.equal.quotes
-    - match: '#*[0-9A-Za-z_\-\.]+='
-      scope: mcs.declare.equal
+    #
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+)=[\[{])'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.declare.equal.object
+        - match: '\'''
+          scope: mcs.quotes
+        - match: '"'
+          scope: mcs.quotes
+        - match: '='
+          scope: mcs.mc
+          pop: true
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\'')=)'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.declare.equal.quotes
+        - match: '\'''
+          scope: mcs.quotes.single
+        - match: '"'
+          scope: mcs.quotes.single
+        - match: '='
+          scope: mcs.mc
+          pop: true
+    - match: '(#*[0-9A-Za-z_\-\.]+)(=)'
+      captures: {1: mcs.declare.equal, 2: mcs.mc}
+    #
     #
     - match: '(?<=[:=])(?=[a-zA-Z0-9\-\._!])'
       push:
