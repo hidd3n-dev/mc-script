@@ -98,15 +98,6 @@ true and false
 -11_11.
 -.11_11
 
-11_11
-11_11.11_11
-11_11.
-.11_11
--11_11
--11_11.11_11
--11_11.
--.11_11
-
 * underscores are unsupported in ranges
 11..
 11.. 
@@ -665,11 +656,12 @@ return
 function
 data
 scoreboard
+teleport
+tp
 
 advancement
 playsound
 title
-tp
 fill
 random
 clear
@@ -711,7 +703,6 @@ locate
 item
 loot
 waypoint
-teleport
 
 me
 teammsg
@@ -762,11 +753,12 @@ list
   function
   data
   scoreboard
+  teleport
+  tp
 
   advancement
   playsound
   title
-  tp
   fill
   random
   clear
@@ -808,7 +800,6 @@ list
   item
   loot
   waypoint
-  teleport
 
   me
   teammsg
@@ -859,11 +850,12 @@ list
   ... stuff ... function
   ... stuff ... data
   ... stuff ... scoreboard
+  ... stuff ... teleport
+  ... stuff ... tp
 
   ... stuff ... advancement
   ... stuff ... playsound
   ... stuff ... title
-  ... stuff ... tp
   ... stuff ... fill
   ... stuff ... random
   ... stuff ... clear
@@ -905,7 +897,6 @@ list
   ... stuff ... item
   ... stuff ... loot
   ... stuff ... waypoint
-  ... stuff ... teleport
 
   ... stuff ... me
   ... stuff ... teammsg

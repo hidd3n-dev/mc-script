@@ -40,7 +40,7 @@ scoreboard players add @s aaa 11
 
       say hello!
 
-          tellraw @a  {"text" : "Whitespace?" , "color" : "red" }    
+          tellraw @a  {"text" : "Whitespace?" ,  color  :  "red"  }    
 
 # comment\
   say no comment

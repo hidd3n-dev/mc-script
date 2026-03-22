@@ -164,7 +164,7 @@ contexts:
 
   declarations:
     # any compound declarations
-    - match: '(?=#*[0-9A-Za-z_\-\.]+(?:[:=])[^\S]*[\[{])'
+    - match: '(?=#*[0-9A-Za-z_\-\.]+[^\S]*(?:[:=])[^\S]*[\[{])'
       push:
         - include: mc
         - include: line_cont
@@ -198,7 +198,7 @@ contexts:
           pop: true
     #
     # non quoted declarations
-    - match: '(#*[0-9A-Za-z_\-\.]+)(:|=)'
+    - match: '(#*[0-9A-Za-z_\-\.]+)(?:[^\S]*)(:|=)'
       captures: {1: mcs.color.neon, 2: mcs.mc}
     #
     #
@@ -303,6 +303,8 @@ contexts:
       scope: mcs.color.teal
     - match: '(?:^[^\S\n]*|(?<=run ))\b(?:scoreboard)\b'
       scope: mcs.color.gold
+    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:tp|teleport)\b'
+      scope: mcs.color.viola
       #
     - match: '(?:^[^\S\n]*|(?<=run ))\b(?:tellraw|return)\b'
       scope: mcs.color.azure
@@ -314,7 +316,7 @@ contexts:
     - match: '\b(?:if|unless)\b'
       scope: mcs.color.amber
     #
-    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:advancement|playsound|title|tp|fill|random|clear|enchant|experience|xp|gamemode|give|particle|recipe|spawnpoint|stopsound|datapack|defaultgamemode|difficulty|dialog|fillbiome|gamerule|setworldspawn|time|weather|worldborder|attribute|damage|effect|kill|ride|rotate|spectate|spreadplayers|tag|team|bossbar|summon|clone|setblock|place|locate|item|loot|waypoint|teleport|me|teammsg|tm|publish|debug|help|test|seed|reload|jfr|version|fetchprofile|swing|perf|save-all|save-off|save-on|stop|ban-ip|ban|banlist|deop|op|pardon-ip|pardon|setidletimeout|transfer|whitelist|msg|tell|w|kick|list)\b'
+    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:advancement|playsound|title|fill|random|clear|enchant|experience|xp|gamemode|give|particle|recipe|spawnpoint|stopsound|datapack|defaultgamemode|difficulty|dialog|fillbiome|gamerule|setworldspawn|time|weather|worldborder|attribute|damage|effect|kill|ride|rotate|spectate|spreadplayers|tag|team|bossbar|summon|clone|setblock|place|locate|item|loot|waypoint|me|teammsg|tm|publish|debug|help|test|seed|reload|jfr|version|fetchprofile|swing|perf|save-all|save-off|save-on|stop|ban-ip|ban|banlist|deop|op|pardon-ip|pardon|setidletimeout|transfer|whitelist|msg|tell|w|kick|list)\b'
       scope: mcs.color.neon
     #
     - match: '\b(?:eyes|feet|over|setdisplay|actionbar|gametime)\b'
