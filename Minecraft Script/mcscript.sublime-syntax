@@ -169,7 +169,7 @@ contexts:
 
 
   declarations:
-    - match: '(?=#*[0-9A-Za-z_\-\.]+:[\[{])'
+    - match: '(?=#*[0-9A-Za-z_\-\.]+:[^\S]*[\[{])'
       push:
         - include: mc
         - include: line_cont
@@ -179,7 +179,7 @@ contexts:
         - match: ':'
           scope: mcs.mc
           pop: true
-    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''):[\[{])'
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''):[^\S]*[\[{])'
       push:
         - include: mc
         - include: line_cont
@@ -217,7 +217,7 @@ contexts:
       captures: {1: mcs.declare.colon, 2: mcs.mc}
     #
     #
-    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+)=[\[{])'
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+)=[^\S]*[\[{])'
       push:
         - include: mc
         - include: line_cont
@@ -290,9 +290,7 @@ contexts:
     - match: '(?<!\w)(-?{{Int_}})([uUsS]?)([lL])(?!\w)'
       captures: {1: mcs.number, 2: mcs.number.type, 3: mcs.number.type.long}
     - match: '(?<!\w)(0b)(\d(?:_*\d){0,2})(?!\w)'
-      captures:
-        1: mcs.number.type.byte
-        2: mcs.number
+      captures: {1: mcs.number.type.byte, 2: mcs.number}
     - match: '(?<!\w)(0x)([[:xdigit:]](?:_*[[:xdigit:]])*)([uUsS])([bB])(?!\w)'
       captures: {1: mcs.number.type, 2: mcs.number, 3: mcs.number.type, 4: mcs.number.type.byte}
     - match: '(?<!\w)(0x)([[:xdigit:]](?:_*[[:xdigit:]])*)([uUsS]?)([sS])(?!\w)'

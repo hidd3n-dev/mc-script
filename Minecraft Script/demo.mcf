@@ -126,7 +126,7 @@ data modify storage my:namespace path.to.array append from entity @e[type=armor_
 execute align xyz anchored eyes facing entity @p[distance=..50] feet positioned ^ ^ ^1 if predicate my:custom_predicate run ride @s mount @e[type=horse,limit=1,distance=..3]
 
 
-tellraw @a [{"text":"\u00A7cError: ","bold":true},{"nbt":"CustomName","entity":"@e[type=pig,limit=1]","interpret":true,"hoverEvent":{"action":"show_text","contents":{"text":"\\\"Nested String\\\""}}}]
+tellraw @s  [ { "text": "\u00A7cError: " , "bold": true } , { "nbt": "CustomName" , "entity": "@e[type=pig,limit=1]" , "interpret": true, "hoverEvent": { "action": "show_text" , "contents":  { "text": "\\\"Nested String\\\"" } } } ]
 
 
 summon potion ~ ~ ~ {Item:{id:"minecraft:lingering_po\

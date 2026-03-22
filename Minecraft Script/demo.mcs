@@ -321,6 +321,10 @@ uuid(str) uuid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
 ... #Declare:
 ... '#Declare:specify':
 ... "#Declare:specify":
+... #Declare=
+... '#Declare:specify'=
+... "#Declare:specify"=
+
 ... '#Declare:specify':{}
 ... "#Declare:specify":{}
 ... '#Declare:specify':[]
@@ -329,9 +333,6 @@ uuid(str) uuid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
 ... ["#Declare:specify":{}]
 ... {'#Declare:specify':[]}
 ... {"#Declare:specify":[]}
-... #Declare=
-... '#Declare:specify'=
-... "#Declare:specify"=
 ... '#Declare:specify'={}
 ... "#Declare:specify"={}
 ... '#Declare:specify'=[]
@@ -340,6 +341,40 @@ uuid(str) uuid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
 ... ["#Declare:specify"={}]
 ... {'#Declare:specify'=[]}
 ... {"#Declare:specify"=[]}
+
+... '#Declare:specify': {}
+... "#Declare:specify": {}
+... '#Declare:specify': []
+... "#Declare:specify": []
+... ['#Declare:specify': {}]
+... ["#Declare:specify": {}]
+... {'#Declare:specify': []}
+... {"#Declare:specify": []}
+... '#Declare:specify'= {}
+... "#Declare:specify"= {}
+... '#Declare:specify'= []
+... "#Declare:specify"= []
+... ['#Declare:specify'= {}]
+... ["#Declare:specify"= {}]
+... {'#Declare:specify'= []}
+... {"#Declare:specify"= []}
+
+... '#Declare:specify':  {}
+... "#Declare:specify":  {}
+... '#Declare:specify':  []
+... "#Declare:specify":  []
+... ['#Declare:specify':   {}]
+... ["#Declare:specify":   {}]
+... {'#Declare:specify':   []}
+... {"#Declare:specify":   []}
+... '#Declare:specify'=    {}
+... "#Declare:specify"=    {}
+... '#Declare:specify'=    []
+... "#Declare:specify"=    []
+... ['#Declare:specify'=     {}]
+... ["#Declare:specify"=     {}]
+... {'#Declare:specify'=     []}
+... {"#Declare:specify"=     []}
 
 
 minecraft:
