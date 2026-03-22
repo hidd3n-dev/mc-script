@@ -58,9 +58,6 @@ contexts:
           pop: true
     - match: '\*(?!=)'
       scope: mcs.remark.asterisk
-    ## trailing spaces
-    #- match: '^[^\S\n]+|[^\S\n]+$'
-    #  scope: mcs.remark.whitespace
 
 
   comments:
@@ -93,9 +90,6 @@ contexts:
   errors:
     # trailing line conts after ending line cont
     - match: '\\{2,}[^\S\n]*$'
-      scope: mcs.error
-    # duplicate spaces
-    - match: '(?<=\S)(?:\t+|[^\S]{2,})(?=\S)'
       scope: mcs.error
     # command starts with /
     - match: '^[^\S]*/+'
@@ -176,34 +170,30 @@ contexts:
         - include: line_cont
         - include: remarks
         - include: macros
-        - meta_scope: mcs.color.gold
+        - meta_scope: mcs.color.azure
         - match: ':|='
           scope: mcs.mc
           pop: true
-    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\'')(?:[:=])[^\S]*[\[{])'
-      push:
-        - include: mc
-        - include: line_cont
-        - include: remarks
-        - include: macros
-        - meta_scope: mcs.color.gold
-        - match: '\''|"'
-          scope: mcs.color.amber
-        - match: '(?<=\''|"):|='
-          scope: mcs.mc
-          pop: true
-    #
-    # quoted declarations
-    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\'')(?:[:=]))'
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\'')[^\S]*(?:[:=])[^\S]*[\[{])'
       push:
         - include: mc
         - include: line_cont
         - include: remarks
         - include: macros
         - meta_scope: mcs.color.azure
-        - match: '\''|"'
-          scope: mcs.color.viola
-        - match: '(?<=\''|"):|='
+        - match: '(?<=\''|")[^\S]*:|='
+          scope: mcs.mc
+          pop: true
+    #
+    # quoted declarations
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\'')[^\S]*(?:[:=]))'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.color.gold
+        - match: '(?<=\''|")[^\S]*:|='
           scope: mcs.mc
           pop: true
     #
@@ -218,7 +208,7 @@ contexts:
         - include: remarks
         - include: errors
         - include: macros
-        - meta_scope: mcs.declare
+        - meta_scope: mcs.void
         - match: '/|\.|!'
           scope: mcs.declare.separator
         - match: '(?=[^a-zA-Z0-9\-\._/])|$'
@@ -276,7 +266,7 @@ contexts:
     - match: '(?<!\w)(?:=|\+=|-=|\*=|/=|%=|><|<|>|<=|>=)(?!\w)'
       scope: mcs.core.operation
     - match: '(?<!\w)@(?:p|r|a|e|s|n)(?!\w)'
-      scope: mcs.core.tarsel
+      scope: mcs.color.green
     - match: '(?<!\S)~(?=[\t\s\d\.\-\\$]|$)'
       scope: mcs.core.tilde
     - match: '(?<!\S)\^(?=[\t\s\d\.\-\\$]|$)'
@@ -295,17 +285,17 @@ contexts:
         - include: remarks
         - include: errors
         - include: macros
-        - meta_scope: mcs.core.call
-        - meta_content_scope: mcs.core.call.arg
+        - meta_scope: mcs.color.azure
+        - meta_content_scope: mcs.color.amber
         - match: '\)'
           pop: true
 
 
   commands:
     - match: '(?:^[^\S\n]*|(?<=run ))\b(?:execute)\b'
-      scope: mcs.color.rozy
+      scope: mcs.color.rose
     - match: '\b(?:run|with|dummy)\b'
-      scope: mcs.color.rozy
+      scope: mcs.color.rose
       #
     - match: '(?:^[^\S\n]*|(?<=run ))\b(?:say)\b'
       scope: mcs.color.green
@@ -363,13 +353,13 @@ contexts:
     - include: quotes
     #
     - match: '\('
-      scope: mcs.color.rozy
+      scope: mcs.color.rose
       push: wraps_b
     - match: '\['
-      scope: mcs.color.rozy
+      scope: mcs.color.rose
       push: wraps_b
     - match: '{'
-      scope: mcs.color.rozy
+      scope: mcs.color.rose
       push: wraps_b
     #
     - match: '\)'
@@ -406,11 +396,11 @@ contexts:
       push: wraps_a
     #
     - match: '\)'
-      scope: mcs.color.rozy
+      scope: mcs.color.rose
       pop: true
     - match: '\]'
-      scope: mcs.color.rozy
+      scope: mcs.color.rose
       pop: true
     - match: '}'
-      scope: mcs.color.rozy
+      scope: mcs.color.rose
       pop: true

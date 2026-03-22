@@ -48,7 +48,6 @@ with\
 
 trailing line conts \\
 trailing line conts \\  
-duplicate spaces  inside sentences
 /non truncated command entry
   /non truncated command entry
 trailing integer number range dots: matches 11... , matches ...11 , matches 11...11, matches ...-11
@@ -359,22 +358,39 @@ uuid(str) uuid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
 ... {'#Declare:specify'= []}
 ... {"#Declare:specify"= []}
 
-... '#Declare:specify':  {}
-... "#Declare:specify":  {}
-... '#Declare:specify':  []
-... "#Declare:specify":  []
-... ['#Declare:specify':   {}]
-... ["#Declare:specify":   {}]
-... {'#Declare:specify':   []}
-... {"#Declare:specify":   []}
-... '#Declare:specify'=    {}
-... "#Declare:specify"=    {}
-... '#Declare:specify'=    []
-... "#Declare:specify"=    []
-... ['#Declare:specify'=     {}]
-... ["#Declare:specify"=     {}]
-... {'#Declare:specify'=     []}
-... {"#Declare:specify"=     []}
+... '#Declare:specify' : {}
+... "#Declare:specify" : {}
+... '#Declare:specify' : []
+... "#Declare:specify" : []
+... ['#Declare:specify' : {}]
+... ["#Declare:specify" : {}]
+... {'#Declare:specify' : []}
+... {"#Declare:specify" : []}
+... '#Declare:specify' = {}
+... "#Declare:specify" = {}
+... '#Declare:specify' = []
+... "#Declare:specify" = []
+... ['#Declare:specify' = {}]
+... ["#Declare:specify" = {}]
+... {'#Declare:specify' = []}
+... {"#Declare:specify" = []}
+
+... '#Declare:specify'     :  {}
+... "#Declare:specify"     :  {}
+... '#Declare:specify'     :  []
+... "#Declare:specify"     :  []
+... ['#Declare:specify'    :   {}]
+... ["#Declare:specify"    :   {}]
+... {'#Declare:specify'    :   []}
+... {"#Declare:specify"    :   []}
+... '#Declare:specify'   =    {}
+... "#Declare:specify"   =    {}
+... '#Declare:specify'   =    []
+... "#Declare:specify"   =    []
+... ['#Declare:specify'  =     {}]
+... ["#Declare:specify"  =     {}]
+... {'#Declare:specify'  =     []}
+... {"#Declare:specify"  =     []}
 
 
 minecraft:
@@ -437,6 +453,12 @@ run say hi
 {one: 1, two: "abc123", tree: {}}
 {X:3,Y:64,Z:129}
 
+''
+'quote'
+'quote\''
+'quote\'quote'
+'quote\'quote\'\'quote'
+
 ""
 "quote"
 "quote\""
@@ -487,6 +509,8 @@ execute store result ...
 execute store success ...
 
 title @s actionbar "okaeri"
+
+time query gametime
 
 scoreboard objectives add obj0 trigger
 scoreboard objectives add obj1 dummy

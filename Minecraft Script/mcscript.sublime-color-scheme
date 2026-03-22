@@ -3,16 +3,16 @@
   "author":"hidd3n-dev",
 
   "variables": {
-    "Rozy": "hsl(353, 80%, 73%)",//#ff7788//
+    "Rose": "hsl(353, 80%, 73%)",//#ff7788//
     "Neon": "hsl(320, 80%, 80%)",//#ff99dd//
     "Pink": "hsl(336, 80%, 83%)",//#ffaacc//
-    "Amber": "hsl(23, 80%, 73%)",//#ffaa77//quoteSINGLE, caret
+    "Amber": "hsl(23, 80%, 73%)",//#ffaa77//
     "Gold": "hsl(40, 80%, 70%)",//#ffcc66//
-    "Lemon": "hsl(51, 80%, 77%)",//#ffee88//quoteSINGLE.body
-    "Green": "hsl(120, 80%, 73%)",//#77ff77//numbers, number ranges, tarsel
-    "Teal": "hsl(154, 80%, 77%)",//#88ffcc//quoteDOUBLE.body
+    "Lemon": "hsl(51, 80%, 77%)",//#ffee88//
+    "Green": "hsl(120, 80%, 73%)",//#77ff77//
+    "Teal": "hsl(154, 80%, 77%)",//#88ffcc//
     "Azure": "hsl(220, 80%, 80%)",//#99bbff//
-    "Viola": "hsl(250, 80%, 80%)",//#aa99ff//operations, tilde, quoteDOUBLE
+    "Viola": "hsl(250, 80%, 80%)",//#aa99ff//
   },
 
   "globals":
@@ -78,7 +78,7 @@
     },
     {},
     {},// colors
-    {"scope":"mcs.color.rozy","foreground":"var(Rozy)"},
+    {"scope":"mcs.color.rose","foreground":"var(Rose)"},
     {"scope":"mcs.color.neon","foreground":"var(Neon)"},
     {"scope":"mcs.color.pink","foreground":"var(Pink)"},
     {"scope":"mcs.color.amber","foreground":"var(Amber)"},
@@ -94,6 +94,7 @@
       "scope":"mcs",
       "foreground":"#e8e8e8"
     },
+    {},
     {},// mc
     {
       "scope":"mcs.mc",
@@ -104,6 +105,7 @@
       "scope":"mcs.mc.a",
       "foreground":"#ff5599",
     },
+    {},
     {},// line_cont
     {
       "scope":"mcs.line_cont",
@@ -167,7 +169,12 @@
     {},// numbers
     {
       "scope":"mcs.number",
-      "foreground":"#ffd480",
+      "foreground":"var(Lemon)",
+    },
+    {
+      "scope":"mcs.number.range",
+      "foreground":"var(Green)",
+      "font_style":"bold"
     },
     {
       "scope":"mcs.number.type",
@@ -180,11 +187,6 @@
     {"scope":"mcs.number.type.long","foreground":"hsl(180, 65%, 45%)"},
     {"scope":"mcs.number.type.float","foreground":"hsl(45, 85%, 60%)"},
     {"scope":"mcs.number.type.double","foreground":"hsl(130, 60%, 55%)"},
-    {
-      "scope":"mcs.number.range",
-      "foreground":"#55dd70",
-      "font_style":"bold"
-    },
     {},
     {},// core
     {
@@ -219,30 +221,18 @@
     },
     {
       "scope":"mcs.core.operation",
-      "foreground":"#88ff88",
+      "foreground":"var(Neon)",
       "font_style":"bold"
     },
     {
-      "scope":"mcs.core.tarsel",
-      "foreground":"#ffcc77",
-    },
-    {
       "scope":"mcs.core.tilde",
-      "foreground":"#ff80ff",
+      "foreground":"var(Neon)",
       "font_style":"bold"
     },
     {
       "scope":"mcs.core.caret",
-      "foreground":"#ff9944",
+      "foreground":"var(Amber)",
       "font_style":"bold"
-    },
-    {
-      "scope":"mcs.core.call",
-      "foreground":"#8fc7ff",
-    },
-    {
-      "scope":"mcs.core.call.arg",
-      "foreground":"#ffbb99",
     },
     {},
   ]
