@@ -2,6 +2,19 @@
   "name":"Minecraft Script Color Scheme (Sublime Text)",
   "author":"hidd3n-dev",
 
+  "variables": {
+    "Rozy": "hsl(353, 80%, 73%)",//#ff7788//
+    "Neon": "hsl(320, 80%, 80%)",//#ff99dd//
+    "Pink": "hsl(336, 80%, 83%)",//#ffaacc//
+    "Amber": "hsl(23, 80%, 73%)",//#ffaa77//quoteSINGLE, caret
+    "Gold": "hsl(40, 80%, 70%)",//#ffcc66//
+    "Lemon": "hsl(51, 80%, 77%)",//#ffee88//quoteSINGLE.body
+    "Green": "hsl(120, 80%, 73%)",//#77ff77//numbers, number ranges, tarsel
+    "Teal": "hsl(154, 80%, 77%)",//#88ffcc//quoteDOUBLE.body
+    "Azure": "hsl(220, 80%, 80%)",//#99bbff//
+    "Viola": "hsl(250, 80%, 80%)",//#aa99ff//operations, tilde, quoteDOUBLE
+  },
+
   "globals":
   {
     "foreground": "#e8e8e8",
@@ -64,6 +77,18 @@
       "font_style":"bold italic glow underline stippled_underline squiggly_underline"
     },
     {},
+    {},// colors
+    {"scope":"mcs.color.rozy","foreground":"var(Rozy)"},
+    {"scope":"mcs.color.neon","foreground":"var(Neon)"},
+    {"scope":"mcs.color.pink","foreground":"var(Pink)"},
+    {"scope":"mcs.color.amber","foreground":"var(Amber)"},
+    {"scope":"mcs.color.gold","foreground":"var(Gold)"},
+    {"scope":"mcs.color.lemon","foreground":"var(Lemon)"},
+    {"scope":"mcs.color.green","foreground":"var(Green)"},
+    {"scope":"mcs.color.teal","foreground":"var(Teal)"},
+    {"scope":"mcs.color.azure","foreground":"var(Azure)"},
+    {"scope":"mcs.color.viola","foreground":"var(Viola)"},
+    {},
     {},// plain text
     {
       "scope":"mcs",
@@ -122,40 +147,6 @@
       "background":"#ff4d6a",
     },
     {},
-    {},// commands
-    {"scope":"mcs.command","foreground":"hsl(350, 100%, 75%)"},
-    {"scope":"mcs.command.a","foreground":"hsl(140, 80%, 65%)"},
-    {"scope":"mcs.command.b","foreground":"hsl(190, 80%, 75%)"},
-    {"scope":"mcs.command.c","foreground":"hsl(40, 100%, 75%)"},
-    {"scope":"mcs.command.d","foreground":"hsl(355, 80%, 65%)"},
-    {},
-    {},// quotes
-    {
-      "scope":"mcs.quotes.escape",
-      "foreground":"#ffb0cc",
-    },{
-      "scope":"mcs.quotes.single",
-      "foreground":"#ff80a0",
-    },{
-      "scope":"mcs.quotes.single.body",
-      "foreground":"#ffee88",
-    },{
-      "scope":"mcs.quotes",
-      "foreground":"#a0bbee",
-    },{
-      "scope":"mcs.quotes.body",
-      "foreground":"#a0ffc5",
-    },
-    {},
-    {},// wraps
-    {
-      "scope":"mcs.wrap.a",
-      "foreground":"#9999ff",
-    },{
-      "scope":"mcs.wrap.b",
-      "foreground":"#ff80aa",
-    },
-    {},
     {},// macros
     {
       "scope":"mcs.macro",
@@ -172,13 +163,6 @@
       "foreground":"#ff5599",
       "font_style":"bold"
     },
-    {"scope":"mcs.declare.colon.object","foreground":"hsl(225, 80%, 85%)"},
-    {"scope":"mcs.declare.colon.quotes","foreground":"hsl(35, 70%, 80%)"},
-    {"scope":"mcs.declare.colon","foreground":"hsl(325, 100%, 80%)"},
-    {},
-    {"scope":"mcs.declare.equal.object","foreground":"hsl(215, 100%, 80%)"},
-    {"scope":"mcs.declare.equal.quotes","foreground":"hsl(340, 100%, 80%)"},
-    {"scope":"mcs.declare.equal","foreground":"hsl(30, 80%, 75%)"},
     {},
     {},// numbers
     {

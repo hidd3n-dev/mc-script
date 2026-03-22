@@ -629,19 +629,18 @@ stuff=-11.11..-11.11
 ## 1.21.11 - 90+2 commands
 
 execute
-return
 run
 with
-trigger
-
-say
-tellraw
-function
-data
-scoreboard
 schedule
 forceload
 tick
+say
+tellraw
+trigger
+return
+function
+data
+scoreboard
 
 advancement
 playsound
@@ -727,19 +726,18 @@ list
 
 
   execute
-  return
   run
   with
-  trigger
-
-  say
-  tellraw
-  function
-  data
-  scoreboard
   schedule
   forceload
   tick
+  say
+  tellraw
+  trigger
+  return
+  function
+  data
+  scoreboard
 
   advancement
   playsound
@@ -825,19 +823,18 @@ list
 
 
   ... stuff ... execute
-  ... stuff ... return
   ... stuff ... run
   ... stuff ... with
-  ... stuff ... trigger
-
-  ... stuff ... say
-  ... stuff ... tellraw
-  ... stuff ... function
-  ... stuff ... data
-  ... stuff ... scoreboard
   ... stuff ... schedule
   ... stuff ... forceload
   ... stuff ... tick
+  ... stuff ... say
+  ... stuff ... tellraw
+  ... stuff ... trigger
+  ... stuff ... return
+  ... stuff ... function
+  ... stuff ... data
+  ... stuff ... scoreboard
 
   ... stuff ... advancement
   ... stuff ... playsound

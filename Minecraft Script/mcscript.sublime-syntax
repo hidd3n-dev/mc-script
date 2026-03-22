@@ -118,10 +118,10 @@ contexts:
         - include: line_cont
         - include: remarks
         - include: macros
-        - meta_scope: mcs.quotes.single
-        - meta_content_scope: mcs.quotes.single.body
+        - meta_scope: mcs.color.amber
+        - meta_content_scope: mcs.color.lemon
         - match: '{{Escapes}}'
-          scope: mcs.quotes.escape
+          scope: mcs.color.pink
         - match: '\'''
           pop: true
     #
@@ -131,23 +131,23 @@ contexts:
         - include: line_cont
         - include: remarks
         - include: macros
-        - meta_scope: mcs.quotes
-        - meta_content_scope: mcs.quotes.body
+        - meta_scope: mcs.color.azure
+        - meta_content_scope: mcs.color.teal
         - match: '{{Escapes}}'
-          scope: mcs.quotes.escape
+          scope: mcs.color.pink
         - match: '"'
           pop: true
 
 
   wraps:
     - match: '\('
-      scope: mcs.wrap.a
+      scope: mcs.color.viola
       push: wraps_a
     - match: '\['
-      scope: mcs.wrap.a
+      scope: mcs.color.viola
       push: wraps_a
     - match: '{'
-      scope: mcs.wrap.a
+      scope: mcs.color.viola
       push: wraps_a
 
 
@@ -169,84 +169,47 @@ contexts:
 
 
   declarations:
-    - match: '(?=#*[0-9A-Za-z_\-\.]+:[^\S]*[\[{])'
+    # any compound declarations
+    - match: '(?=#*[0-9A-Za-z_\-\.]+(?:[:=])[^\S]*[\[{])'
       push:
         - include: mc
         - include: line_cont
         - include: remarks
         - include: macros
-        - meta_scope: mcs.declare.colon.object
-        - match: ':'
+        - meta_scope: mcs.color.gold
+        - match: ':|='
           scope: mcs.mc
           pop: true
-    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''):[^\S]*[\[{])'
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\'')(?:[:=])[^\S]*[\[{])'
       push:
         - include: mc
         - include: line_cont
         - include: remarks
         - include: macros
-        - meta_scope: mcs.declare.colon.object
-        - match: '\'''
-          scope: mcs.quotes
-        - match: '(?<=\''):'
+        - meta_scope: mcs.color.gold
+        - match: '\''|"'
+          scope: mcs.color.amber
+        - match: '(?<=\''|"):|='
           scope: mcs.mc
           pop: true
-        - match: '"'
-          scope: mcs.quotes
-        - match: '(?<="):'
-          scope: mcs.mc
-          pop: true
-    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''):)'
-      push:
-        - include: mc
-        - include: line_cont
-        - include: remarks
-        - include: macros
-        - meta_scope: mcs.declare.colon.quotes
-        - match: '\'''
-          scope: mcs.quotes.single
-        - match: '(?<=\''):'
-          scope: mcs.mc
-          pop: true
-        - match: '"'
-          scope: mcs.quotes.single
-        - match: '(?<="):'
-          scope: mcs.mc
-          pop: true
-    - match: '(#*[0-9A-Za-z_\-\.]+)(:)'
-      captures: {1: mcs.declare.colon, 2: mcs.mc}
     #
+    # quoted declarations
+    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\'')(?:[:=]))'
+      push:
+        - include: mc
+        - include: line_cont
+        - include: remarks
+        - include: macros
+        - meta_scope: mcs.color.azure
+        - match: '\''|"'
+          scope: mcs.color.viola
+        - match: '(?<=\''|"):|='
+          scope: mcs.mc
+          pop: true
     #
-    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\''|#*[0-9A-Za-z_\-\.]+)=[^\S]*[\[{])'
-      push:
-        - include: mc
-        - include: line_cont
-        - include: remarks
-        - include: macros
-        - meta_scope: mcs.declare.equal.object
-        - match: '\'''
-          scope: mcs.quotes
-        - match: '"'
-          scope: mcs.quotes
-        - match: '='
-          scope: mcs.mc
-          pop: true
-    - match: '(?=("#*[0-9A-Za-z_\-\.:]+"|\''#*[0-9A-Za-z_\-\.:]+\'')=)'
-      push:
-        - include: mc
-        - include: line_cont
-        - include: remarks
-        - include: macros
-        - meta_scope: mcs.declare.equal.quotes
-        - match: '\'''
-          scope: mcs.quotes.single
-        - match: '"'
-          scope: mcs.quotes.single
-        - match: '='
-          scope: mcs.mc
-          pop: true
-    - match: '(#*[0-9A-Za-z_\-\.]+)(=)'
-      captures: {1: mcs.declare.equal, 2: mcs.mc}
+    # non quoted declarations
+    - match: '(#*[0-9A-Za-z_\-\.]+)(:|=)'
+      captures: {1: mcs.color.neon, 2: mcs.mc}
     #
     #
     - match: '(?<=[:=])(?=[a-zA-Z0-9\-\._!])'
@@ -339,25 +302,37 @@ contexts:
 
 
   commands:
-    - match: '(?:(?<=run )|^[^\S\n]*)\b(?:say|tellraw)\b'
-      scope: mcs.command.a
-    - match: '(?:(?<=run )|^[^\S\n]*)\b(?:function|data)\b'
-      scope: mcs.command.b
-    - match: '(?:(?<=run )|^[^\S\n]*)\b(?:scoreboard|schedule)\b'
-      scope: mcs.command.c
-    - match: '(?:(?<=run )|^[^\S\n]*)\b(?:forceload|tick)\b'
-      scope: mcs.command.d
-    - match: '\b(?:run|with|trigger|if|unless|result|success|dummy)\b'
-      scope: mcs.command
-    - match: '(?:(?<=run )|^[^\S\n]*)\b(?:execute|return|advancement|playsound|title|tp|fill|random|clear|enchant|experience|xp|gamemode|give|particle|recipe|spawnpoint|stopsound|datapack|defaultgamemode|difficulty|dialog|fillbiome|gamerule|setworldspawn|time|weather|worldborder|attribute|damage|effect|kill|ride|rotate|spectate|spreadplayers|tag|team|bossbar|summon|clone|setblock|place|locate|item|loot|waypoint|teleport|me|teammsg|tm|publish|debug|help|test|seed|reload|jfr|version|fetchprofile|swing|perf|save-all|save-off|save-on|stop|ban-ip|ban|banlist|deop|op|pardon-ip|pardon|setidletimeout|transfer|whitelist|msg|tell|w|kick|list)\b'
-      scope: mcs.command
+    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:execute)\b'
+      scope: mcs.color.rozy
+    - match: '\b(?:run|with|dummy)\b'
+      scope: mcs.color.rozy
+      #
+    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:say)\b'
+      scope: mcs.color.green
+    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:function|data)\b'
+      scope: mcs.color.teal
+    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:scoreboard)\b'
+      scope: mcs.color.gold
+      #
+    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:tellraw|return)\b'
+      scope: mcs.color.azure
+    - match: '\b(?:result|success|trigger)\b'
+      scope: mcs.color.azure
+      #
+    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:tick|forceload|schedule)\b'
+      scope: mcs.color.amber
+    - match: '\b(?:if|unless)\b'
+      scope: mcs.color.amber
+    #
+    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:advancement|playsound|title|tp|fill|random|clear|enchant|experience|xp|gamemode|give|particle|recipe|spawnpoint|stopsound|datapack|defaultgamemode|difficulty|dialog|fillbiome|gamerule|setworldspawn|time|weather|worldborder|attribute|damage|effect|kill|ride|rotate|spectate|spreadplayers|tag|team|bossbar|summon|clone|setblock|place|locate|item|loot|waypoint|teleport|me|teammsg|tm|publish|debug|help|test|seed|reload|jfr|version|fetchprofile|swing|perf|save-all|save-off|save-on|stop|ban-ip|ban|banlist|deop|op|pardon-ip|pardon|setidletimeout|transfer|whitelist|msg|tell|w|kick|list)\b'
+      scope: mcs.color.neon
     #
     - match: '\b(?:eyes|feet|over|setdisplay|actionbar|gametime)\b'
-      scope: mcs.command
+      scope: mcs.color.pink
     - match: '(?<=align )(?:[xyz]|x[yz]|y[xz]|z[yx]|xyz|xzy|yxz|yzx|zxy|zyx)\b'
-      scope: mcs.command
+      scope: mcs.color.pink
     - match: '\b(?:attacker|controller|leasher|origin|owner|passengers|target|vehicle)\b'
-      scope: mcs.command
+      scope: mcs.color.pink
     #
     - match: '\bbyte\b'
       scope: mcs.number.type.byte
@@ -388,23 +363,23 @@ contexts:
     - include: quotes
     #
     - match: '\('
-      scope: mcs.wrap.b
+      scope: mcs.color.rozy
       push: wraps_b
     - match: '\['
-      scope: mcs.wrap.b
+      scope: mcs.color.rozy
       push: wraps_b
     - match: '{'
-      scope: mcs.wrap.b
+      scope: mcs.color.rozy
       push: wraps_b
     #
     - match: '\)'
-      scope: mcs.wrap.a
+      scope: mcs.color.viola
       pop: true
     - match: '\]'
-      scope: mcs.wrap.a
+      scope: mcs.color.viola
       pop: true
     - match: '}'
-      scope: mcs.wrap.a
+      scope: mcs.color.viola
       pop: true
 
   wraps_b:
@@ -421,21 +396,21 @@ contexts:
     - include: quotes
     #
     - match: '\('
-      scope: mcs.wrap.a
+      scope: mcs.color.viola
       push: wraps_a
     - match: '\['
-      scope: mcs.wrap.a
+      scope: mcs.color.viola
       push: wraps_a
     - match: '{'
-      scope: mcs.wrap.a
+      scope: mcs.color.viola
       push: wraps_a
     #
     - match: '\)'
-      scope: mcs.wrap.b
+      scope: mcs.color.rozy
       pop: true
     - match: '\]'
-      scope: mcs.wrap.b
+      scope: mcs.color.rozy
       pop: true
     - match: '}'
-      scope: mcs.wrap.b
+      scope: mcs.color.rozy
       pop: true
