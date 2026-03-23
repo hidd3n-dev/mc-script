@@ -31,7 +31,7 @@ contexts:
 
 
   mc:
-    - match: '(#?minecraft)(:)'
+    - match: '(#?minecraft)(:|\.)'
       captures:
         1: mcs.mc
         2: mcs.mc.a
@@ -63,7 +63,7 @@ contexts:
   comments:
     - match: '^[^\S\n]*###'
       push:
-        - include: mc
+        #- include: mc
         - include: line_cont
         - include: remarks
         - meta_scope: mcs.comment.triple
@@ -71,7 +71,7 @@ contexts:
           pop: true
     - match: '^[^\S\n]*##'
       push:
-        - include: mc
+        #- include: mc
         - include: line_cont
         - include: remarks
         - meta_scope: mcs.comment.double
@@ -79,7 +79,7 @@ contexts:
           pop: true
     - match: '^[^\S\n]*#'
       push:
-        - include: mc
+        #- include: mc
         - include: line_cont
         - include: remarks
         - meta_scope: mcs.comment.single
@@ -202,13 +202,16 @@ contexts:
       captures: {1: mcs.color.neon, 2: mcs.mc}
     #
     #
-    - match: '(?<=[:=])(?=[a-zA-Z0-9\-\._!])'
+    - match: '(?<=[:=])[^\S]*(?=[a-zA-Z0-9\-\._!])'
       push:
+        - include: mc
         - include: line_cont
         - include: remarks
         - include: errors
         - include: macros
-        - meta_scope: mcs.void
+        - include: numbers
+        - include: core
+        - meta_content_scope: mcs.void
         - match: '/|\.|!'
           scope: mcs.declare.separator
         - match: '(?=[^a-zA-Z0-9\-\._/])|$'
@@ -303,7 +306,7 @@ contexts:
       scope: mcs.color.teal
     - match: '(?:^[^\S\n]*|(?<=run ))\b(?:scoreboard)\b'
       scope: mcs.color.gold
-    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:tp|teleport)\b'
+    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:tp|teleport|fill|setblock|clone|setworldspawn|spreadplayers)\b'
       scope: mcs.color.viola
       #
     - match: '(?:^[^\S\n]*|(?<=run ))\b(?:tellraw|return)\b'
@@ -316,7 +319,7 @@ contexts:
     - match: '\b(?:if|unless)\b'
       scope: mcs.color.amber
     #
-    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:advancement|playsound|title|fill|random|clear|enchant|experience|xp|gamemode|give|particle|recipe|spawnpoint|stopsound|datapack|defaultgamemode|difficulty|dialog|fillbiome|gamerule|setworldspawn|time|weather|worldborder|attribute|damage|effect|kill|ride|rotate|spectate|spreadplayers|tag|team|bossbar|summon|clone|setblock|place|locate|item|loot|waypoint|me|teammsg|tm|publish|debug|help|test|seed|reload|jfr|version|fetchprofile|swing|perf|save-all|save-off|save-on|stop|ban-ip|ban|banlist|deop|op|pardon-ip|pardon|setidletimeout|transfer|whitelist|msg|tell|w|kick|list)\b'
+    - match: '(?:^[^\S\n]*|(?<=run ))\b(?:advancement|playsound|title|random|clear|enchant|experience|xp|gamemode|give|particle|recipe|spawnpoint|stopsound|datapack|defaultgamemode|difficulty|dialog|fillbiome|gamerule|time|weather|worldborder|attribute|damage|effect|kill|ride|rotate|spectate|tag|team|bossbar|summon|place|locate|item|loot|waypoint|me|teammsg|tm|publish|debug|help|test|seed|reload|jfr|version|fetchprofile|swing|perf|save-all|save-off|save-on|stop|ban-ip|ban|banlist|deop|op|pardon-ip|pardon|setidletimeout|transfer|whitelist|msg|tell|w|kick|list)\b'
       scope: mcs.color.neon
     #
     - match: '\b(?:eyes|feet|over|setdisplay|actionbar|gametime)\b'
@@ -345,7 +348,7 @@ contexts:
     - include: mc
     - include: line_cont
     - include: remarks
-    - include: comments
+    #- include: comments
     - include: errors
     - include: macros
     - include: numbers
@@ -378,7 +381,7 @@ contexts:
     - include: mc
     - include: line_cont
     - include: remarks
-    - include: comments
+    #- include: comments
     - include: errors
     - include: macros
     - include: numbers

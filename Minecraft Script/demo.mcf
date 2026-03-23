@@ -22,24 +22,67 @@ execute as @a at @s as @e[type=!player,limit=10,sort=random] run tp ^ ^ ^10
 ------------------------------------------------------------------------------------------------------------------------
 
 
-$data remove storage sp_warp_compasses:st db[{uuid:$(uuid)}]
+advancement revoke @s only homeward_bone:used_homeward_bone
+
+execute unless data entity @s respawn run playsound minecraft:block.note_block.cow_bell master @s ~ ~50 ~ 50 0.7
+execute unless data entity @s respawn run return run tellraw @s {"text": " No HOME to warp to!", "color": "#ddcc55"}
+
+data modify storage homeward_bone:st warp.x set from entity @s respawn.pos[0]
+data modify storage homeward_bone:st warp.y set from entity @s respawn.pos[1]
+data modify storage homeward_bone:st warp.z set from entity @s respawn.pos[2]
+data modify storage homeward_bone:st warp.d set from entity @s respawn.dimension
+data modify storage homeward_bone:st warp.yaw set from entity @s Rotation[0]
+data modify storage homeward_bone:st warp.pitch set from entity @s Rotation[1]
+
+execute as @s run function homeward_bone:f1 with storage homeward_bone:st warp
+
+execute at @s run particle minecraft:poof ~ ~1.2 ~ .5 .5 .5 0 15 force @s
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+give @s minecraft:bone[\
+  enchantment_glint_override=true,\
+  custom_data={homeward_bone:1},\
+  custom_name={"color":"#eebb55","italic":false,"text":"Homeward Bone"},\
+  lore=[\
+    [{"text": "A mysterious bone", "color": "#bbbbbb", "italic": false}],\
+    [{"text": "to take you home...", "color": "#bbbbbb", "italic": false}]\
+  ],\
+  consumable={\
+    consume_seconds:2.5,animation:"brush",sound:"block.beacon.power_select",has_consume_particles:false,\
+    on_consume_effects:[{type:"minecraft:play_sound",sound:"entity.evoker.prepare_summon"}]\
+  },\
+  use_cooldown={seconds:2.5,cooldown_group:"homeward_bone:a"}\
+] 3
+
+
+------------------------------------------------------------------------------------------------------------------------
+
 
 $item modify entity @s weapon.mainhand {\
-function:"minecraft:set_components",\
-components:{\
-"minecraft:consumable":{consume_seconds:999,animation:"brush",has_consume_particles:false},\
-"minecraft:custom_data":{sp_warp_compasses:1},\
-"minecraft:custom_name":[{"color":"#ee77cc","italic":false,"text":"Warp Compass "}, {"color":"$(color)","italic":false,"text":"[$(x), $(y), $(z)]"}],\
-"minecraft:lore":[[{"text": "Travel whence it points", "color": "#bbbbbb", "italic": false}],[{"text": "by spending an ", "color": "#bbbbbb", "italic": false}, {"text": "Emerald", "color": "#2DE56B", "italic": false}]]\
-}\
-}
+  function:"minecraft:set_components",\
+  components:{\
+    "minecraft:consumable":{consume_seconds:999,animation:"brush",has_consume_particles:false},\
+    "minecraft:custom_data":{warp_compasses:1},\
+    "minecraft:custom_name":[\
+      {"color":"#ee77cc","italic":false,"text":"Warp Compass "},\
+      {"color":"$(color)","italic":false,"text":"[$(x), $(y), $(z)]"}\
+    ],\
+    "minecraft:lore":[\
+      [{"text": "Travel whence it points", "color": "#bbbbbb", "italic": false}],\
+      [\
+        {"text": "by spending an ", "color": "#bbbbbb", "italic": false},\
+        {"text": "Emerald", "color": "#2DE56B", "italic": false}\
+      ]\
+    ]}}
 
-execute if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{flags:{is_sneaking:false}}} run return 0
 
-$execute in $(d) unless entity @e[tag=$(d_)_$(x)$(z)_$(lean)] \
-run return run summon end_crystal $(x) 4000 $(z) {beam_target:[I;$(x),-9999999,$(z)], Tags:["$(d_)_$(x)$(z)_$(lean)"]}
+------------------------------------------------------------------------------------------------------------------------
 
-$execute in $(d) run kill @e[tag=$(d_)_$(x)$(z)_$(lean)]
+
+*
 
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -47,7 +90,7 @@ $execute in $(d) run kill @e[tag=$(d_)_$(x)$(z)_$(lean)]
 
 give @s minecraft:golden_pickaxe[\
 enchantment_glint_override=true,\
-custom_data={sp_all_tools:gold},\
+custom_data={all_tools:gold},\
 custom_name=[{"text": "All Tool ", "color": "#eebb55", "italic": false},{"text": "Gold", "color": "#eeeeee", "italic": false}],\
 attribute_modifiers=[\
 {type:"minecraft:attack_damage",amount:2,id:"minecraft:base_attack_damage",operation:"add_value",slot:"mainhand"},\

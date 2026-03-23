@@ -20,8 +20,8 @@ with\
 data modify storage abc:st 0.a set value 1.2e1_1f
 data modify storage abc:st 0.b set value 1.1E1_1D
 
-#execute as @n[distance=1_1.1..] run say sheep!
-execute as @n[distance=11.1..] run say sheep!
+#execute as @n[tag =  !   hey    ,     distance      =       1_1.1..        ] run say sheep!
+execute as @n[tag =  !   hey    ,     distance      =       11.1..        ] run say sheep!
 
 #tp ~ ~1_1.1 ~
 #execute at @s run tp ~ ~-.1_1 ~
