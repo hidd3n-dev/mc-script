@@ -1,6 +1,8 @@
 # Minecraft Script
 
-> will add a promotional gif once I rework the color scheme, have got a pretty good concept in the works
+### Minecraft Commands Syntax Highlighter for Sublime Text
+
+![Promotional file.](https://raw.githubusercontent.com/hidd3n-dev/mc-script/media/promo.gif)
 
 ## About
 A Sublime Text package providing syntax highlighting to `.mcfunction` files used in Minecraft data packs development.
