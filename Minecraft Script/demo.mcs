@@ -705,6 +705,7 @@ particle
 recipe
 spawnpoint
 stopsound
+stopwatch
 datapack
 defaultgamemode
 difficulty
@@ -803,6 +804,7 @@ list
   recipe
   spawnpoint
   stopsound
+  stopwatch
   datapack
   defaultgamemode
   difficulty
@@ -901,6 +903,7 @@ list
 ... recipe
 ... spawnpoint
 ... stopsound
+... stopwatch
 ... datapack
 ... defaultgamemode
 ... difficulty
